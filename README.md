@@ -2,12 +2,21 @@
 Administración de  normas
 
 ## stack
-* React
-* React-router
-* Redux
-* Redux-sagas
+* JavaScript :
+  * React
+  * React-router
+  * Redux
+  * Redux-sagas
+  * Immutable
+  * Axios
 * Create-react-app
 * CSS-Modules
-* Immutable
-* Axios
 * Material (UI)
+* Storybook
+* StandardJS
+
+## Init
+
+`npm install`
+
+`npm start`
