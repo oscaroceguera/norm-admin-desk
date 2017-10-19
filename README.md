@@ -1,21 +1,32 @@
-# norm-admin-desk
-Administración de  normas
+# norm-admin-desk (f-sheck)
 
-## stack
-* *[x] React
-* *[x] Redux
-* *[x] React-redux
-* *[x] Redux-sagas
-* *[x] Immutable
-* *[x] Axios
-* *[x] Create-react-app
-* *[ ] CSS-Modules
-* *[x] Material (UI)
-* *[x] Storybook
-* *[x] StandardJS
-* *[x] lodash
-* *[x] React-router-dom
-* *[x] Reselect
+Administración de normas, esta app sera responsive design, pesanda para usarse en desktop en navegadores como chrome y firefox.
+
+## Stack
+
+**React**, **Redux**, **React-redux**, **Redux-sagas**, **Immutable**, **Axios**, **Create-react-app**, **CSS-Modules**, **Material (UI)**, **Storybook**, **StandardJS**, **lodash**, **React-router-dom**, **Reselect**
+
+## Version
+
+v1: 
+
+> Se usará una api-fake para simular los servicios
+
+* CRUD de norma
+* CRUD de modulos
+* CRUD de items
+
+v2:
+
+* Conectar con API
+* Decargar hoja de calculo
+* Descargar pdf
+
+v3:
+
+* Sesión de usuario
+* Adminstración de usuario
+* Recuperar contraseña
 
 ## Init
 
