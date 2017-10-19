@@ -11,7 +11,7 @@ Administración de  normas
 * *[x] Create-react-app
 * *[ ] CSS-Modules
 * *[x] Material (UI)
-* *[ ] Storybook
+* *[x] Storybook
 * *[x] StandardJS
 * *[x] lodash
 * *[x] React-router-dom
