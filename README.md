@@ -15,7 +15,7 @@ Administración de  normas
 * *[ ] Storybook
 * *[ ] StandardJS
 * *[ ] lodash
-* *[ ] React-router-dom
+* *[x] React-router-dom
 * *[ ] reselect
 
 ## Init
