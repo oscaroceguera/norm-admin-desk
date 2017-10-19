@@ -2,21 +2,20 @@
 Administración de  normas
 
 ## stack
-* *[ ] React
-* *[ ] React-router
-* *[ ] Redux
-* *[ ] React-redux
-* *[ ] Redux-sagas
-* *[ ] Immutable
-* *[ ] Axios
-* *[ ] Create-react-app
+* *[x] React
+* *[x] Redux
+* *[x] React-redux
+* *[x] Redux-sagas
+* *[x] Immutable
+* *[x] Axios
+* *[x] Create-react-app
 * *[ ] CSS-Modules
-* *[ ] Material (UI)
+* *[x] Material (UI)
 * *[ ] Storybook
-* *[ ] StandardJS
-* *[ ] lodash
+* *[x] StandardJS
+* *[x] lodash
 * *[x] React-router-dom
-* *[ ] reselect
+* *[x] Reselect
 
 ## Init
 
