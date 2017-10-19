@@ -16,7 +16,7 @@ Administración de  normas
 * *[ ] StandardJS
 * *[ ] lodash
 * *[ ] React-router-dom
-* *[ ]reselect
+* *[ ] reselect
 
 ## Init
 
