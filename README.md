@@ -2,9 +2,11 @@
 
 Administración de normas, esta app sera responsive design, pesanda para usarse en desktop en navegadores como chrome y firefox.
 
+UI: inspirada en Material-ui
+
 ## Stack
 
-**React**, **Redux**, **React-redux**, **Redux-sagas**, **Immutable**, **Axios**, **Create-react-app**, **CSS-Modules**, **Material (UI)**, **Storybook**, **StandardJS**, **lodash**, **React-router-dom**, **Reselect**
+**React**, **Redux**, **React-redux**, **Redux-sagas**, **Immutable**, **Axios**, **Create-react-app**, **CSS-Modules**, **~~Material-UI~~**, **Storybook**, **StandardJS**, **lodash**, **React-router-dom**, **Reselect**
 
 ## Version
 
