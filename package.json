@@ -58,10 +58,11 @@
     "build-storybook": "build-storybook -s public"
   },
   "devDependencies": {
-    "standard": "^10.0.3",
-    "@storybook/react": "^3.2.12",
     "@storybook/addon-actions": "^3.2.12",
-    "@storybook/addon-links": "^3.2.12"
+    "@storybook/addon-links": "^3.2.12",
+    "@storybook/addon-notes": "^3.2.13",
+    "@storybook/react": "^3.2.12",
+    "standard": "^10.0.3"
   },
   "jest": {
     "collectCoverageFrom": [
