@@ -1,13 +1,37 @@
-// TODO: Colores por deafult es el primary
-// TODO: Color primary sera el secundario
-// TODO: Por default es enable y puede recibir el parametro para ser disabled
-// TODO: Recibe un onclick
-// TODO: recibe label y tenien uno por defaul que es button
 import React from 'react'
+import PropTypes from 'prop-types'
 import * as styles from './styles.css'
+import classNames from 'classnames'
 
-export default function Button () {
+function Button ({ primary, disabled, label, onClick }) {
+  const classStyle = classNames(styles.btnClase, {
+    [styles.default]: !primary,
+    [styles.primary]: primary,
+    [styles.disabled]: disabled
+  })
+
   return (
-    <button className={styles.btnClase}>Button</button>
+    <button
+      className={classStyle}
+      onClick={disabled ? null : onClick}
+    >
+      {label.toUpperCase()}
+    </button>
   )
 }
+
+Button.defaultProps = {
+  primary: false,
+  disabled: false,
+  label: 'Button',
+  onClick: f => f
+}
+
+Button.propTypes = {
+  primary: PropTypes.bool,
+  disabled: PropTypes.bool,
+  label: PropTypes.string,
+  onClick: PropTypes.func
+}
+
+export default Button
