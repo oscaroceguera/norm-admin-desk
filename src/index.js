@@ -6,6 +6,8 @@ import createSagaMiddleware from 'redux-saga'
 import './index.css'
 import {App} from './containers'
 
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+
 import * as reducers from './reducers'
 import rootSaga from './sagas'
 
@@ -25,7 +27,9 @@ rootSaga.forEach(saga => sagaMiddleware.run(saga))
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <MuiThemeProvider>
+      <App />
+    </MuiThemeProvider>
   </Provider>,
   document.getElementById('root')
 )
