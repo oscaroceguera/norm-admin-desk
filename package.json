@@ -64,6 +64,11 @@
     "@storybook/addon-notes": "^3.2.13",
     "@storybook/react": "^3.2.12",
     "classnames": "^2.2.5",
+    "enzyme": "^3.1.0",
+    "enzyme-adapter-react-16": "^1.0.2",
+    "enzyme-to-json": "^3.1.4",
+    "react-test-renderer": "^16.0.0",
+    "sinon": "^4.0.2",
     "standard": "^10.0.3"
   },
   "jest": {
@@ -73,6 +78,7 @@
     "setupFiles": [
       "<rootDir>/config/polyfills.js"
     ],
+    "setupTestFrameworkScriptFile": "<rootDir>/config/setupTest.js",
     "testMatch": [
       "<rootDir>/src/**/__tests__/**/*.js?(x)",
       "<rootDir>/src/**/?(*.)(spec|test).js?(x)"
