@@ -1,5 +1,7 @@
 import Button from './Button'
+import { TextField } from './Form'
 
 export {
-  Button
+  Button,
+  TextField
 }

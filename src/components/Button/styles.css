@@ -1,5 +1,5 @@
 @value colors: "../../stylesheets/ui-color-palette.css";
-@value pink, lightBlue, cyan grey from colors;
+@value pink, lightBlue, cyan, grey from colors;
 
 .btnClase {
   border-radius: 3px;
