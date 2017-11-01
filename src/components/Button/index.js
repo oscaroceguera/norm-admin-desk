@@ -23,15 +23,14 @@ function Button ({ primary, disabled, label, onClick }) {
 Button.defaultProps = {
   primary: false,
   disabled: false,
-  label: 'Button',
-  onClick: f => f
+  label: 'Button'
 }
 
 Button.propTypes = {
   primary: PropTypes.bool,
   disabled: PropTypes.bool,
   label: PropTypes.string,
-  onClick: PropTypes.func
+  onClick: PropTypes.func.isRequired
 }
 
 export default Button
