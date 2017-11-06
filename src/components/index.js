@@ -1,7 +1,8 @@
 import Button from './Button'
-import { TextField } from './Form'
+import { TextField, SelectField } from './Form'
 
 export {
   Button,
-  TextField
+  TextField,
+  SelectField
 }

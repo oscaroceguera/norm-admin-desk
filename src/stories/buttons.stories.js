@@ -1,5 +1,5 @@
 import React from 'react'
-
+import './styles.css'
 import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 import { withKnobs, boolean, text } from '@storybook/addon-knobs'
