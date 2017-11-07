@@ -9,6 +9,21 @@ import {App} from './containers'
 import * as reducers from './reducers'
 import rootSaga from './sagas'
 
+const PROCESS = process.env.NODE_ENV
+
+if (PROCESS !== 'production') {
+  // eslint-disable-next-line no-unused-vars,react/no-deprecated
+  let createClass = React.createClass
+  Object.defineProperty(React, 'createClass', {
+    set: (nextCreateClass) => {
+      createClass = nextCreateClass
+    }
+  })
+  console.log('wrapping with whyDidYouUpdate in ', PROCESS)
+  const {whyDidYouUpdate} = require('why-did-you-update')
+  whyDidYouUpdate(React)
+}
+
 const sagaMiddleware = createSagaMiddleware()
 
 const store = createStore(

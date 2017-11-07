@@ -69,7 +69,8 @@
     "enzyme-to-json": "^3.1.4",
     "react-test-renderer": "^16.0.0",
     "sinon": "^4.0.2",
-    "standard": "^10.0.3"
+    "standard": "^10.0.3",
+    "why-did-you-update": "0.0.8"
   },
   "jest": {
     "collectCoverageFrom": [
