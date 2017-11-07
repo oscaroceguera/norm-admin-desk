@@ -1,9 +1,10 @@
 import Button from './Button'
-import { TextField, SelectField, Checkbox } from './Form'
+import { TextField, SelectField, Checkbox, AutoComplete } from './Form'
 
 export {
   Button,
   TextField,
   SelectField,
-  Checkbox
+  Checkbox,
+  AutoComplete
 }
