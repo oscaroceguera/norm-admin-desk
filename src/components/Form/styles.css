@@ -151,3 +151,16 @@
     height: 18px;
   }
 }
+
+.CheckContainer {
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+}
+
+.CheckItem {
+}
+
+.CheckTitle {
+  color: grey;
+}

@@ -1,7 +1,7 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { withKnobs, text, select } from '@storybook/addon-knobs'
-import { TextField, SelectField } from '../components'
+import { TextField, SelectField, Checkbox } from '../components'
 import './styles.css'
 
 const { label, options, defaultValue } = {
@@ -27,22 +27,25 @@ const stories = storiesOf('Form', module)
 stories.addDecorator(withKnobs)
 
 stories
-  .add('TextField', () => {
-    return (
-      <TextField
-        width={select(label, options, defaultValue)}
-        placeholder={text('Placeholder')}
-        title={text('Title', 'Email')}
-      />
-    )
-  })
+  .add('TextField', () => (
+    <TextField
+      width={select(label, options, defaultValue)}
+      placeholder={text('Placeholder')}
+      title={text('Title', 'Email')}
+    />
+  ))
 
-  .add('SelectField', () => {
-    return (
-      <SelectField
-        items={ITEMS}
-        title={text('Title', 'Seleccione una opción')}
-        width={select(label, options, defaultValue)}
-      />
-    )
-  })
+  .add('SelectField', () => (
+    <SelectField
+      items={ITEMS}
+      title={text('Title', 'Seleccione una opcion')}
+      width={select(label, options, defaultValue)}
+    />
+  ))
+
+  .add('Checkbox', () => (
+    <Checkbox
+      title={text('Title', 'option')}
+      value='9de64059-d62f-4102-a61b-c4022c43d8d9'
+    />
+  ))
