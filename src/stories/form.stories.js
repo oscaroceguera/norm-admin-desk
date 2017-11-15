@@ -38,7 +38,7 @@ stories
   .add('TextField', () => (
     <TextField
       width={select(label, options, defaultValue)}
-      placeholder={text('Placeholder')}
+      placeholder={text('Placeholder', 'Nombre')}
       title={text('Title', 'Email')}
     />
   ))
@@ -59,5 +59,9 @@ stories
   ))
 
   .add('AutoComplete', () => (
-    <AutoComplete data={DATA} />
+    <AutoComplete
+      data={DATA}
+      placeholder={text('Placeholder', 'Ciudad')}
+      width={select(label, options, defaultValue)}
+    />
   ))
