@@ -24,8 +24,7 @@ class AutoComplete extends React.PureComponent {
     this.state = {
       data: props.data,
       dataSource: baseState.dataSource,
-      valueSelected: baseState.valueSelected,
-      width: props.width
+      valueSelected: baseState.valueSelected
     }
   }
 
@@ -73,7 +72,7 @@ class AutoComplete extends React.PureComponent {
           value={valueSelected.value}
           onChange={this.onChange}
         />
-        {dataSource && (
+        {dataSource.length > 0 && (
           <ul className={AutoCompleteListContainer}>
             {dataSource.map(i => (
               <li
@@ -105,7 +104,3 @@ AutoComplete.propTypes = {
 }
 
 export default AutoComplete
-
-// TODO: ACENTO DE MEXICO
-// TODO: Mostrar/ocuoltar list
-// TODO: Ocultar list al seleccionar click afuera de la lista

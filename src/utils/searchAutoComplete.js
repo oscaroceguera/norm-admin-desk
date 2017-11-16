@@ -5,7 +5,7 @@ const searchData = (data, value) => {
     return []
   }
   const lowerValue = value.toLowerCase()
-  return data.filter(x => x.desc.toLowerCase().includes(lowerValue))
+  return data.filter(x => deburr(x.desc.toLowerCase()).includes(lowerValue))
 }
 
 export default searchData
