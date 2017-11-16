@@ -1,0 +1,5 @@
+.mixin_appearance {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}

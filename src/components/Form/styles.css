@@ -1,0 +1,201 @@
+@value colors: "../../stylesheets/ui-color-palette.css";
+@value grey800, indigo, pink300, cyan, grey, grey300 from colors;
+
+.BaseInput {
+  padding: .5em 0 0.2em 0;
+  border: 0;
+  outline: 0;
+  border-bottom: 1px solid grey300;
+  margin: .1em 0;
+  font-size: 1em;
+}
+
+.Small {
+  width: 100px;
+}
+
+.Medium {
+  width: 200px;
+}
+
+.Large {
+  width: 250px;
+}
+
+.FullWidth {
+  width: 100%;
+}
+
+.FieldContainer:focus-within .TitleField {
+  color: cyan;
+}
+
+.TitleField {
+  color: grey;
+  display: block;
+}
+
+.InputHero {
+  composes: BaseInput;
+}
+
+.Small:focus {
+  animation-name: focusSmall;
+  animation-duration: .3s;
+  animation-timing-function: ease-in-out;
+  border-bottom: 2px solid cyan;
+}
+
+@keyframes focusSmall {
+  0% {
+    width: 0px;
+  }
+  100% {
+    width: 100px;
+  }
+}
+
+.Medium:focus {
+  animation-name: focusMedium;
+  animation-duration: .3s;
+  animation-timing-function: ease-in-out;
+  border-bottom: 2px solid cyan;
+}
+
+@keyframes focusMedium {
+  0% {
+    width: 0px;
+  }
+  100% {
+    width: 200px;
+  }
+}
+
+.Large:focus {
+  animation-name: focusLarge;
+  animation-duration: .3s;
+  animation-timing-function: ease-in-out;
+  border-bottom: 2px solid cyan;
+}
+
+@keyframes focusLarge {
+  0% {
+    width: 0px;
+  }
+  100% {
+    width: 250px;
+  }
+}
+
+.FullWidth:focus {
+  animation-name: focusFullWidth;
+  animation-duration: .3s;
+  animation-timing-function: ease-in-out;
+  border-bottom: 2px solid cyan;
+}
+
+@keyframes focusFullWidth {
+  0% {
+    width: 0px;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+/* Select */
+.borderBtnSlc {
+  border-bottom: 1px solid grey300;
+}
+
+.SlcContainer {
+  font-size: 16px;
+  padding: .5em .5em 0 .5em;
+}
+
+.SlcTitle {
+  color: grey;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+}
+
+.SlcHero {
+  background: white;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  box-shadow: 0 0 5px gray;
+}
+
+.SlcItem {
+  color: grey800;
+  animation-duration: .5s;
+  animation-name: optionWindow;
+  padding: .5em;
+}
+
+.SlcItem:hover {
+  color: #F06292;
+  cursor: pointer;
+}
+
+@keyframes optionWindow {
+  0% {
+    height: 0px;
+  }
+  95% {
+    height: 20px;
+  }
+  100% {
+    height: 18px;
+  }
+}
+
+.CheckContainer {
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+}
+
+.CheckItem {
+}
+
+.CheckTitle {
+  color: grey;
+}
+
+/* AutoComplete */
+.AutoCompleteContainer {
+  border: 1px solid;
+}
+
+.AutoCompleteField {
+  border: 0;
+  outline: 0;
+  border-bottom: 1px solid grey300;
+  font-size: 1em;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.AutoCompleteListContainer {
+  box-shadow: 1px 1px 5px grey;
+  padding: 0.5em;
+  margin: 0;
+  list-style: none;
+  background: white;
+  color: grey800;
+}
+
+.AutoCompleteListItem {
+  margin: .5em 0;
+  transition: .3s;
+}
+
+.AutoCompleteListItem:hover {
+  color: #F06292;
+  cursor: pointer;
+}
+
