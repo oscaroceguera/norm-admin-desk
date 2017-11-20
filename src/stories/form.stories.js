@@ -1,6 +1,6 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
-import { withKnobs, text, select } from '@storybook/addon-knobs'
+import { withKnobs, boolean, text, select } from '@storybook/addon-knobs'
 import { TextField, SelectField, Checkbox, AutoComplete } from '../components'
 import './styles.css'
 
@@ -13,6 +13,16 @@ const { label, options, defaultValue } = {
     FullWidth: 'FullWidth'
   },
   defaultValue: 'Medium'
+}
+
+const INPUT_TYPES = {
+  label: 'Types',
+  options: {
+    text: 'Text',
+    number: 'Number',
+    email: 'Email'
+  },
+  defaultValue: 'text'
 }
 
 const ITEMS = [
@@ -39,7 +49,10 @@ stories
     <TextField
       width={select(label, options, defaultValue)}
       placeholder={text('Placeholder', 'Nombre')}
-      title={text('Title', 'Email')}
+      title={text('Nombre', 'Nombre')}
+      value={text('Value', '123')}
+      type={select(INPUT_TYPES.label, INPUT_TYPES.options, INPUT_TYPES.defaultValue)}
+      required={boolean('Required', false)}
     />
   ))
 

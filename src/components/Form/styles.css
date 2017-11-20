@@ -39,6 +39,12 @@
   composes: BaseInput;
 }
 
+.RequiredMsg {
+  color: red;
+  display: block;
+  font-size: .7em;
+}
+
 .Small:focus {
   animation-name: focusSmall;
   animation-duration: .3s;
