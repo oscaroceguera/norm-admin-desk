@@ -61,6 +61,7 @@ stories
       items={ITEMS}
       title={text('Title', 'Seleccione una opcion')}
       width={select(label, options, defaultValue)}
+      required={boolean('Required', false)}
     />
   ))
 
