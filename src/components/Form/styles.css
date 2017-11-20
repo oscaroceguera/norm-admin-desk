@@ -169,6 +169,7 @@
 }
 
 .CheckItem {
+  border: 1px solid red;
 }
 
 .CheckTitle {
@@ -180,10 +181,17 @@
   border: 1px solid;
 }
 
+.borderBottom {
+  border-bottom: 1px solid grey300 !important;
+}
+
+.borderBottomRequired {
+  border-bottom: 1px solid red !important;
+}
+
 .AutoCompleteField {
   border: 0;
   outline: 0;
-  border-bottom: 1px solid grey300;
   font-size: 1em;
   width: 100%;
   padding: 0;

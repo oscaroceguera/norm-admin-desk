@@ -69,6 +69,7 @@ stories
     <Checkbox
       title={text('Title', 'option')}
       value='9de64059-d62f-4102-a61b-c4022c43d8d9'
+      required={boolean('Required', false)}
     />
   ))
 
@@ -77,5 +78,6 @@ stories
       data={DATA}
       placeholder={text('Placeholder', 'Ciudad')}
       width={select(label, options, defaultValue)}
+      required={boolean('Required', false)}
     />
   ))
