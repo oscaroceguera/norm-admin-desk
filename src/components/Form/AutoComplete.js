@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, {Component, PropTypes} from 'react'
 import Proptypes from 'prop-types'
 import styles, {
   AutoCompleteContainer,
@@ -61,12 +61,17 @@ class AutoComplete extends React.PureComponent {
  
   render () {
     const { dataSource, valueSelected} = this.state
-    const { width, placeholder} = this.props
+    const { width, placeholder, required } = this.props
+
+    const TxtFieldClass = cx(AutoCompleteField, {
+      [styles.borderBottom]: !required || !!valueSelected.value,
+      [styles.borderBottomRequired]: required && !valueSelected.value
+    })
 
     return (
       <div className={styles[width]}>
         <input
-          className={AutoCompleteField}
+          className={TxtFieldClass}
           placeholder={placeholder}
           type='text'
           value={valueSelected.value}
@@ -94,13 +99,14 @@ class AutoComplete extends React.PureComponent {
 
 AutoComplete.defaultProps = {
   width: 'Medium',
-  placeholder: 'placeholder'
+  placeholder: 'placeholder',
+  required: false
 }
 
 AutoComplete.propTypes = {
   data: Proptypes.array.isRequired,
   width: Proptypes.string,
-  placeholder: Proptypes.string
+  placeholder: Proptypes.string,
 }
 
 export default AutoComplete

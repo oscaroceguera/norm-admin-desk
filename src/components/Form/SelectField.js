@@ -95,10 +95,11 @@ class SelectField extends React.Component {
 
   render () {
     const { item, showItems } = this.state
-    const { items, title, width } = this.props
+    const { items, title, width, required } = this.props
 
     const Container = cx(SlcContainer, styles[width],{
-      [styles.borderBtnSlc]: !this.state.showItems
+      [styles.borderBtnSlc]: !this.state.showItems,
+      [styles.borderBtnSlcRequired]: !this.state.showItems && required && !item.desc
     })
 
     return (
@@ -121,13 +122,15 @@ class SelectField extends React.Component {
 
 SelectField.defaultProps = {
   title: 'Select',
-  width: 'Medium'
+  width: 'Medium',
+  required: false
 }
 
 SelectField.propTypes = {
   items: PropTypes.array.isRequired,
   title: PropTypes.string,
-  width: PropTypes.string
+  width: PropTypes.string,
+  required: PropTypes.bool
 }
 
 
