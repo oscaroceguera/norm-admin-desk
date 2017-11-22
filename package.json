@@ -77,7 +77,7 @@
       "src/**/*.{js,jsx}"
     ],
     "setupFiles": [
-      "<rootDir>/config/polyfills.js"
+      "<rootDir>/config/shim.js"
     ],
     "setupTestFrameworkScriptFile": "<rootDir>/config/setupTest.js",
     "testMatch": [
