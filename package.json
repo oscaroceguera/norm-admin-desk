@@ -67,6 +67,7 @@
     "enzyme": "^3.1.0",
     "enzyme-adapter-react-16": "^1.0.2",
     "enzyme-to-json": "^3.1.4",
+    "identity-obj-proxy": "^3.0.0",
     "react-test-renderer": "^16.0.0",
     "sinon": "^4.0.2",
     "standard": "^10.0.3",
@@ -95,7 +96,8 @@
       "[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$"
     ],
     "moduleNameMapper": {
-      "^react-native$": "react-native-web"
+      "^react-native$": "react-native-web",
+      "\\.css$": "identity-obj-proxy"
     },
     "moduleFileExtensions": [
       "web.js",
