@@ -1,13 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import * as styles from './styles.css'
+import styles from './styles.css'
 import classNames from 'classnames'
 
 function Button ({ primary, disabled, label, onClick }) {
-  const classStyle = classNames(styles.btnClase, {
-    [styles.default]: !primary,
-    [styles.primary]: primary,
-    [styles.disabled]: disabled
+  let buttonBackground = [styles.default]
+
+  if (primary) buttonBackground = [styles.primary]
+
+  const classStyle = classNames(styles.btnClase, buttonBackground, {
+    [styles.disabled]: disabled === true
   })
 
   return (
