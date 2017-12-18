@@ -26,9 +26,9 @@
   width: 100%;
 }
 
-/* .FieldContainer {
+.FieldContainer {
   margin-right: .5em;
-} */
+}
 
 .FieldContainer:focus-within .TitleField {
   color: cyan;
@@ -43,74 +43,15 @@
   composes: BaseInput;
 }
 
+.InputHero:focus {
+  transition: .3s;
+  border-bottom: 1px solid cyan;
+}
+
 .RequiredMsg {
   color: red;
   display: block;
   font-size: .7em;
-}
-
-.Small:focus {
-  animation-name: focusSmall;
-  animation-duration: .3s;
-  animation-timing-function: ease-in-out;
-  border-bottom: 2px solid cyan;
-}
-
-@keyframes focusSmall {
-  0% {
-    width: 0px;
-  }
-  100% {
-    width: 100px;
-  }
-}
-
-.Medium:focus {
-  animation-name: focusMedium;
-  animation-duration: .3s;
-  animation-timing-function: ease-in-out;
-  border-bottom: 2px solid cyan;
-}
-
-@keyframes focusMedium {
-  0% {
-    width: 0px;
-  }
-  100% {
-    width: 200px;
-  }
-}
-
-.Large:focus {
-  animation-name: focusLarge;
-  animation-duration: .3s;
-  animation-timing-function: ease-in-out;
-  border-bottom: 2px solid cyan;
-}
-
-@keyframes focusLarge {
-  0% {
-    width: 0px;
-  }
-  100% {
-    width: 250px;
-  }
-}
-
-.FullWidth:focus {
-  animation-name: focusFullWidth;
-  animation-duration: .3s;
-  animation-timing-function: ease-in-out;
-  border-bottom: 2px solid cyan;
-}
-
-@keyframes focusFullWidth {
-  0% {
-    width: 0px;
-  }
-  100% {
-    width: 100%;
-  }
 }
 
 /* Select */
