@@ -81,3 +81,35 @@ stories
       required={boolean('Required', false)}
     />
   ))
+  .add('A form structure', () => (
+    <div
+      style={{
+        border: '1px solid black',
+        display: 'flex',
+        flexWrap: 'wrap',
+        width: '700px',
+        margin: '1em auto',
+        padding: '.5em'
+      }}>
+      <TextField
+        placeholder={'Nombre del esquema'}
+        title={'Esquema'}
+        value=''
+        required
+      />
+      <TextField
+        placeholder={'versión'}
+        title={'Versión'}
+        width={'Large'}
+        value=''
+        type={'number'}
+      />
+      <TextField
+        placeholder={'Email'}
+        title={'Email'}
+        value=''
+        type={'email'}
+        required
+      />
+    </div>
+  ))
