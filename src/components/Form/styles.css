@@ -26,6 +26,10 @@
   width: 100%;
 }
 
+/* .FieldContainer {
+  margin-right: .5em;
+} */
+
 .FieldContainer:focus-within .TitleField {
   color: cyan;
 }
