@@ -9,7 +9,7 @@ const MSG_FOR_TYPE = {
   number: 'Valores númericos invalidos!'
 }
 
-const TextField = ({ width, placeholder, title, type, required, requiredTitle, value }) => {
+const TextField = ({ width, placeholder, title, type, required, requiredTitle, value, onChange }) => {
   const ClassNames = cx(InputHero, styles[width])
 
   return (
@@ -18,6 +18,7 @@ const TextField = ({ width, placeholder, title, type, required, requiredTitle, v
       <input
         className={ClassNames}
         value={value}
+        onChange={onChange}
         placeholder={placeholder}
       />
       {reqForText(required, value) && <span className={RequiredMsg}>{requiredTitle}</span>}
@@ -44,7 +45,8 @@ TextField.propTypes = {
   title: PropTypes.string,
   type: PropTypes.string,
   required: PropTypes.bool,
-  requiredTitle: PropTypes.string
+  requiredTitle: PropTypes.string,
+  onChange: PropTypes.func.isRequired
 }
 
 export default TextField

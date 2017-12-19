@@ -53,6 +53,7 @@ stories
       value={text('Value', '123')}
       type={select(INPUT_TYPES.label, INPUT_TYPES.options, INPUT_TYPES.defaultValue)}
       required={boolean('Required', false)}
+      onChange={f => f}
     />
   ))
 

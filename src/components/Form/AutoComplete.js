@@ -1,7 +1,6 @@
-import React, {Component, PropTypes} from 'react'
+import React, { PureComponent } from 'react'
 import Proptypes from 'prop-types'
 import styles, {
-  AutoCompleteContainer,
   AutoCompleteField,
   AutoCompleteListContainer,
   AutoCompleteListItem
@@ -18,7 +17,7 @@ const baseState = {
   dataSource: [],
 }
 
-class AutoComplete extends React.PureComponent {
+class AutoComplete extends PureComponent {
   constructor (props) {
     super(props)
     this.state = {
@@ -30,7 +29,7 @@ class AutoComplete extends React.PureComponent {
 
   onChange = (e) => {
     e && e.preventDefault()
-    const { data, valueSelected } = this.state
+    const { data } = this.state
     const {value} = e.target
     const dataSource = searchData(data, value)
     this.setState({

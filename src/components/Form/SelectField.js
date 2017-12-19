@@ -106,7 +106,7 @@ class SelectField extends React.Component {
       <div className={Container} ref={i => this.slcSection = i}>
         <div className={SlcTitle} onClick={this.handleShowItems}>
           <ItemHeader title={title} valueDesc={item.desc} />
-          <img src={ArrowDown} />
+          <img src={ArrowDown} alt='arrow'/>
         </div>
         <Options
           showItems={showItems}
