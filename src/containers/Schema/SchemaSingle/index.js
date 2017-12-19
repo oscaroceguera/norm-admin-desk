@@ -1,35 +1,74 @@
 import React, {Component} from 'react'
-import {TextField} from '../../../components'
+import { SchemaForm } from '../../../components'
 import styles from './styles.css'
+import uuidv4 from 'uuid/v4'
 
 class SchemaContainer extends Component {
+  state = {
+    schema: {
+      name: '',
+      version: '',
+      description: ''
+    },
+    modules: [],
+    module: {
+      id: '',
+      name: '',
+      order: '',
+      number: ''
+    }
+  }
+
+  onChange = (section, field) => (e) => {
+    e && e.preventDefault()
+    console.log('section', section)
+    console.log('field', field)
+    console.log('Value', e.target.value)
+ 
+    this.setState({
+      [section]: {
+        ...this.state[section],
+        [field]: e.target.value
+      }
+    })
+  }
+
+  onSave = section => e => {
+    e && e.preventDefault()
+    console.log('onSave section', section)
+    if (section === 'schema') {
+      return this.setState({
+        schema: {
+          ...this.state.schema,
+          id: uuidv4()
+        }
+      })
+    }
+  }
+
+  onUpdate = section => e => {
+    e && e.preventDefault()
+    console.log('onUpdate section', section)
+  }
+
   render () {
+    console.log('STATE', this.state)
+    const {schema} = this.state
     return (
       <div className={styles.Container}>
         <div className={styles.FormContainer}>
-          <h1 className={styles.FormTitle}>Schema Form</h1>
-          <div className={styles.Form}>
-            <TextField
-              title={'Nombre del esquema'}
-              placeholder={'SENASICA, Global GAP'}
-              required
-            />
-            <TextField
-              title={'Versión'}
-              placeholder={'2.0'}
-              required
-            />
-            <TextField
-              title={'Descripcion'}
-              placeholder={'Descripción ...'}
-              required
-            />
+        <SchemaForm
+          data={schema}
+          onChange={this.onChange}
+          onSave={this.onSave}
+          onUpdate={this.onUpdate}
+        />
+        {schema.id && (
+          <div style={{border: '1px solid black'}}>
+            <h3>Modules</h3>
           </div>
+        )}
         </div>
-        {/* <div style={{border: '1px solid black'}}>
-          <h2>Modules</h2>
-          <h2>Items</h2>
-        </div> */}
       </div>
     )
   }
