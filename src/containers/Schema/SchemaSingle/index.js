@@ -1,4 +1,6 @@
 import React, {Component} from 'react'
+import {connect} from 'react-redux'
+import * as actions from '../../../reducers/Schema'
 import { SchemaForm } from '../../../components'
 import styles from './styles.css'
 import uuidv4 from 'uuid/v4'
@@ -74,4 +76,11 @@ class SchemaContainer extends Component {
   }
 }
 
-export default SchemaContainer
+const mapStateToProps = (state) => {
+  console.log('STATE',state.Schema.toJS())
+  return {
+    props: state
+  }
+}
+
+export default connect(mapStateToProps, actions)(SchemaContainer)
