@@ -1,9 +1,17 @@
 import React, {Component} from 'react'
-import {connect} from 'react-redux'
-import * as actions from '../../../reducers/Schema'
 import { SchemaForm } from '../../../components'
 import styles from './styles.css'
-import uuidv4 from 'uuid/v4'
+import { withRouter } from 'react-router-dom'
+
+import axios from 'axios'
+
+const api = {
+  post: (url, data) => {
+    return axios
+      .post(`http://localhost:5000/api/${url}`, data)
+      .then(res => res.data)
+  }
+}
 
 class SchemaContainer extends Component {
   state = {
@@ -12,6 +20,8 @@ class SchemaContainer extends Component {
       version: '',
       description: ''
     },
+    loadingSchema: false,
+    failSchema: null,
     modules: [],
     module: {
       id: '',
@@ -23,9 +33,9 @@ class SchemaContainer extends Component {
 
   onChange = (section, field) => (e) => {
     e && e.preventDefault()
-    console.log('section', section)
-    console.log('field', field)
-    console.log('Value', e.target.value)
+    // console.log('section', section)
+    // console.log('field', field)
+    // console.log('Value', e.target.value)
  
     this.setState({
       [section]: {
@@ -37,34 +47,69 @@ class SchemaContainer extends Component {
 
   onSave = section => e => {
     e && e.preventDefault()
-    console.log('onSave section', section)
+    // console.log('onSave section', section)
     if (section === 'schema') {
-      return this.setState({
+      this.saveSchema()
+      // const id = uuidv4()
+
+      // return this.setState({
+      //   schema: {
+      //     ...this.state.schema,
+      //     id
+      //   }
+      // }, () => {
+      //   this.props.history.push('/schema/' + id)
+      // })
+    }
+  }
+
+  async saveSchema() {
+    this.setState({
+      loadingSchema: true,
+      failSchema: null
+    })
+
+    try {
+      const body = await api.post('schemas', this.state.schema)
+
+      this.setState({
         schema: {
-          ...this.state.schema,
-          id: uuidv4()
-        }
+          id: body.uuid,
+          name: body.name,
+          version: body.version,
+          description: body.description
+        },
+        loadingSchema: false,
+      })
+
+      this.props.history.push('/schema/' + body.uuid)
+    } catch (e) {
+      this.setState({
+        loadingSchema: false,
+        failSchema: e.message
       })
     }
   }
 
   onUpdate = section => e => {
     e && e.preventDefault()
-    console.log('onUpdate section', section)
+    // console.log('onUpdate section', section)
   }
 
   render () {
-    console.log('STATE', this.state)
-    const {schema} = this.state
+    const { schema, loadingSchema, failSchema } = this.state
+    // console.log('SCHEMA', schema)
     return (
       <div className={styles.Container}>
         <div className={styles.FormContainer}>
-        <SchemaForm
-          data={schema}
-          onChange={this.onChange}
-          onSave={this.onSave}
-          onUpdate={this.onUpdate}
-        />
+          <SchemaForm
+            data={schema}
+            onChange={this.onChange}
+            onSave={this.onSave}
+            onUpdate={this.onUpdate}
+            loading={loadingSchema}
+            error={failSchema}
+          />
         {schema.id && (
           <div style={{border: '1px solid black'}}>
             <h3>Modules</h3>
@@ -76,11 +121,4 @@ class SchemaContainer extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  console.log('STATE',state.Schema.toJS())
-  return {
-    props: state
-  }
-}
-
-export default connect(mapStateToProps, actions)(SchemaContainer)
+export default withRouter(SchemaContainer)

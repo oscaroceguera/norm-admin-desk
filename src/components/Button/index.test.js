@@ -5,8 +5,6 @@ import sinon from 'sinon'
 
 import Button from './index'
 
-// const Button = ({ label, onClick}) => <button onClick={onClick}>{label}</button>
-
 /* eslint-disable */
 describe('Button', () => {
   it('should render correctly', () => {
