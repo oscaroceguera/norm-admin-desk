@@ -1,0 +1,79 @@
+@value colors: "../../../stylesheets/ui-color-palette.css";
+@value grey, indigo, grey300, grey800 from colors;
+
+.zeroItemsMsg {
+  padding: .5em;
+  text-align: center;
+  color: indigo;
+  font-size: 2em;
+}
+
+.container {
+  position: relative;
+}
+
+.items {
+  display: flex;
+  padding: 1em;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  width: 90%;
+  position: relative;
+}
+
+@media only screen and (max-width: 1025px) {
+  .items {
+    width: 80%;
+  }
+}
+
+@media only screen and (max-width: 858px) {
+  .items {
+    width: 70%;
+  }
+}
+
+.item {
+  background: white;
+  box-shadow: 0px 0px 5px grey;
+  border-radius: 2px;
+  cursor: pointer;
+  margin: 0 .5em 1em 0;
+  width: 250px;
+}
+
+.item:hover {
+  opacity: 0.8;
+}
+
+.item > p {
+  background: indigo;
+  color: white;
+  margin: 0;
+  padding: .5em;
+  text-transform: uppercase;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.item > div {
+  color: grey800;
+  padding: 0.5em;
+  height: 150px;
+  overflow: auto;
+  font-size: 1em;
+}
+
+.item > div > label {
+  color: grey800;
+  font-size: .8em;
+}
+
+.addSchema {
+  cursor: pointer;
+  width: 50px;
+  position: fixed;
+  right: 2em;
+  bottom: 1.5em;
+}

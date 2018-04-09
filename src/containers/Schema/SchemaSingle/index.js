@@ -1,7 +1,9 @@
 import React, {Component} from 'react'
-import { SchemaForm } from '../../../components'
 import styles from './styles.css'
 import { withRouter } from 'react-router-dom'
+
+import { SchemaForm } from '../../../components'
+import Modules from '../../Modules'
 
 import axios from 'axios'
 
@@ -16,6 +18,11 @@ const api = {
   get: (url) => {
     return axios
       .get(`${HOST}/${url}`)
+      .then(res => res.data)
+  },
+  put: (url, data) => {
+    return axios
+      .patch(`${HOST}/${url}`, data)
       .then(res => res.data)
   }
 }
@@ -89,20 +96,10 @@ class SchemaContainer extends Component {
     // console.log('onSave section', section)
     if (section === 'schema') {
       this.saveSchema()
-      // const id = uuidv4()
-
-      // return this.setState({
-      //   schema: {
-      //     ...this.state.schema,
-      //     id
-      //   }
-      // }, () => {
-      //   this.props.history.push('/schema/' + id)
-      // })
     }
   }
 
-  async saveSchema() {
+  async saveSchema () {
     this.setState({
       loadingSchema: true,
       failSchema: null
@@ -132,7 +129,38 @@ class SchemaContainer extends Component {
 
   onUpdate = section => e => {
     e && e.preventDefault()
-    // console.log('onUpdate section', section)
+    console.log('onUpdate section', section)
+    if (section === 'schema') {
+      this.updateSchema()
+    }
+  }
+
+  async updateSchema() {
+    const { schema } = this.state
+    this.setState({
+      loadingSchema: true,
+      failSchema: null
+    })
+
+    try {
+      const body = await api.put(`schemas/${schema.id}`, schema)
+      this.setState({
+        schema: {
+          id: body.schema.uuid,
+          name: body.schema.name,
+          version: body.schema.version,
+          description: body.schema.description
+        },
+        loadingSchema: false,
+      })
+
+
+    } catch (e) {
+      this.setState({
+        loadingSchema: false,
+        failSchema: e.message
+      })
+    }
   }
 
   render () {
@@ -149,11 +177,9 @@ class SchemaContainer extends Component {
             loading={loadingSchema}
             error={failSchema}
           />
-        {schema.id && (
-          <div style={{border: '1px solid black'}}>
-            <h3>Modules</h3>
-          </div>
-        )}
+          {schema.id && (
+            <Modules />
+          )}
         </div>
       </div>
     )
