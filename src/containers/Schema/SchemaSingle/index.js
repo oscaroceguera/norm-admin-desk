@@ -5,10 +5,17 @@ import { withRouter } from 'react-router-dom'
 
 import axios from 'axios'
 
+const HOST = 'http://localhost:5000/api'
+
 const api = {
   post: (url, data) => {
     return axios
-      .post(`http://localhost:5000/api/${url}`, data)
+      .post(`${HOST}/${url}`, data)
+      .then(res => res.data)
+  },
+  get: (url) => {
+    return axios
+      .get(`${HOST}/${url}`)
       .then(res => res.data)
   }
 }
@@ -28,6 +35,38 @@ class SchemaContainer extends Component {
       name: '',
       order: '',
       number: ''
+    }
+  }
+
+  componentWillMount() {
+    const uuid = this.props.match.params.uuid
+    if (uuid) {
+      this.loadSchema(uuid)
+    }
+  }
+
+  async loadSchema(uuid) {
+    this.setState({
+      loadingSchema: true,
+      failSchema: null
+    })
+    try {
+      const body = await api.get(`/schemas/${uuid}`)
+      this.setState({
+        loadingSchema: false,
+        schema: {
+          id: body.schema.uuid,
+          name: body.schema.name,
+          version: body.schema.version,
+          description: body.schema.description
+        }
+      })
+      
+    } catch (e) {
+      this.setState({
+        loadingSchema: false,
+        failSchema: e.message
+      })
     }
   }
 
@@ -98,7 +137,7 @@ class SchemaContainer extends Component {
 
   render () {
     const { schema, loadingSchema, failSchema } = this.state
-    // console.log('SCHEMA', schema)
+    console.log('SCHEMA', schema)
     return (
       <div className={styles.Container}>
         <div className={styles.FormContainer}>
