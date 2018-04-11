@@ -14,7 +14,8 @@ class App extends Component {
         <Router>
           <Switch>
             <Route exact path='/' component={SchemaListContainer} />
-            <Route path='/schema' component={SchemaContainer} />
+            <Route exact path='/schema' component={SchemaContainer} />
+            <Route exact path='/schema/:uuid' component={SchemaContainer} />
             <Route component={NoMatch} />
           </Switch>
         </Router>

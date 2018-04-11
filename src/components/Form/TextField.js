@@ -36,7 +36,8 @@ TextField.defaultProps = {
   type: 'text',
   required: false,
   requiredTitle: 'Requerido',
-  value: ''
+  value: '',
+  onChange: f => f
 }
 
 TextField.propTypes = {
@@ -46,7 +47,11 @@ TextField.propTypes = {
   type: PropTypes.string,
   required: PropTypes.bool,
   requiredTitle: PropTypes.string,
-  onChange: PropTypes.func.isRequired
+  onChange: PropTypes.func,
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number
+  ])
 }
 
 export default TextField
