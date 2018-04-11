@@ -165,7 +165,7 @@ class SchemaContainer extends Component {
 
   render () {
     const { schema, loadingSchema, failSchema } = this.state
-    console.log('SCHEMA', schema)
+
     return (
       <div className={styles.Container}>
         <div className={styles.FormContainer}>
@@ -178,7 +178,7 @@ class SchemaContainer extends Component {
             error={failSchema}
           />
           {schema.id && (
-            <Modules />
+            <Modules id={schema.id}/>
           )}
         </div>
       </div>

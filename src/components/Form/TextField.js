@@ -48,7 +48,10 @@ TextField.propTypes = {
   required: PropTypes.bool,
   requiredTitle: PropTypes.string,
   onChange: PropTypes.func,
-  value: PropTypes.string
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number
+  ])
 }
 
 export default TextField

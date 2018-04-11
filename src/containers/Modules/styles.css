@@ -1,0 +1,63 @@
+@value colors: "../../stylesheets/ui-color-palette.css";
+@value pink, grey, grey300 from colors;
+
+.noModules {
+  text-align: center;
+  padding: 0.5em 0 1em 0;
+  color: grey300;
+}
+
+.container {
+  border-top: 1px solid grey300;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.title {
+  text-align: center;
+  padding: .5em;
+  margin: 0;
+  color: grey;
+  text-transform: uppercase;
+}
+
+.addBtn {
+  cursor: pointer;
+  transition: .3s;
+}
+
+.addBtn:hover {
+  opacity: 0.7;
+}
+
+.list {
+  display: flex;
+  padding: 1em;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.listItem {
+  cursor: pointer;
+  padding-right: .5em;
+  margin-bottom: .5em;
+}
+
+.listItemDesc {
+  color: white;
+  background: pink;
+  margin: 0;
+  padding: .5em;
+  font-size: 12px;
+  text-decoration: underline;
+  border-radius: 2px;
+  transition: .3s;
+}
+
+.listItemDesc:hover {
+  opacity: .8;
+}
