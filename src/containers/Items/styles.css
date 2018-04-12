@@ -1,0 +1,59 @@
+@value colors: "../../stylesheets/ui-color-palette.css";
+@value grey800, indigo from colors;
+
+.container {
+  margin-bottom: .5em;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: .5em 1em;
+  background: indigo;
+  color: white;
+}
+
+.items {
+  padding: .5em;
+}
+
+.item {
+  color: grey800;
+  font-size: 12px;
+  border-radius: 2px;
+  box-shadow: 0px 0px 5px gray;
+  margin: .5em;
+  padding: .5em;
+  cursor: pointer;
+}
+
+.item:hover {
+  opacity: .7;
+}
+
+.askAndValue {
+  padding: 0;
+  margin: 0;
+}
+
+.comment {
+  padding: 0;
+  margin: .5em 0;
+}
+
+.btnContainer {
+  margin: .5em 0;
+  padding: .5em;
+}
+
+.btnSave {
+  composes: btnContainer;
+  text-align: center;
+}
+
+.btnUpdate {
+  composes: btnContainer;
+  display: flex;
+  justify-content: space-around
+}

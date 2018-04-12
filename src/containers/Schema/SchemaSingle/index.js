@@ -1,11 +1,11 @@
 import React, {Component} from 'react'
-import styles from './styles.css'
 import { withRouter } from 'react-router-dom'
+import axios from 'axios'
+
+import styles from './styles.css'
 
 import { SchemaForm } from '../../../components'
 import Modules from '../../Modules'
-
-import axios from 'axios'
 
 const HOST = 'http://localhost:5000/api'
 
@@ -36,13 +36,6 @@ class SchemaContainer extends Component {
     },
     loadingSchema: false,
     failSchema: null,
-    modules: [],
-    module: {
-      id: '',
-      name: '',
-      order: '',
-      number: ''
-    }
   }
 
   componentWillMount() {
@@ -59,6 +52,7 @@ class SchemaContainer extends Component {
     })
     try {
       const body = await api.get(`/schemas/${uuid}`)
+
       this.setState({
         loadingSchema: false,
         schema: {
@@ -79,10 +73,7 @@ class SchemaContainer extends Component {
 
   onChange = (section, field) => (e) => {
     e && e.preventDefault()
-    // console.log('section', section)
-    // console.log('field', field)
-    // console.log('Value', e.target.value)
- 
+    
     this.setState({
       [section]: {
         ...this.state[section],
@@ -93,20 +84,21 @@ class SchemaContainer extends Component {
 
   onSave = section => e => {
     e && e.preventDefault()
-    // console.log('onSave section', section)
+
     if (section === 'schema') {
       this.saveSchema()
     }
   }
 
-  async saveSchema () {
+  async saveSchema() {
+    const {schema} = this.state
     this.setState({
       loadingSchema: true,
       failSchema: null
     })
 
     try {
-      const body = await api.post('schemas', this.state.schema)
+      const body = await api.post('schemas', schema)
 
       this.setState({
         schema: {
@@ -129,7 +121,7 @@ class SchemaContainer extends Component {
 
   onUpdate = section => e => {
     e && e.preventDefault()
-    console.log('onUpdate section', section)
+
     if (section === 'schema') {
       this.updateSchema()
     }
@@ -177,9 +169,7 @@ class SchemaContainer extends Component {
             loading={loadingSchema}
             error={failSchema}
           />
-          {schema.id && (
-            <Modules id={schema.id}/>
-          )}
+          {schema.id && (<Modules id={schema.id}/>)}
         </div>
       </div>
     )
