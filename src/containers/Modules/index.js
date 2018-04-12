@@ -1,15 +1,13 @@
 import React, { Component } from 'react'
-import styles from './styles.css'
-import AddIcon from './add.svg'
-import {
-  Loading,
-  ErrorMessage
-} from '../../components'
-import ModuleForm from './form'
-
+import axios from 'axios'
 import {pick} from 'lodash/object'
 
-import axios from 'axios'
+import styles from './styles.css'
+import AddIcon from './add.svg'
+
+import { Loading, ErrorMessage } from '../../components'
+import ModuleForm from './form'
+import ItemsContainer from '../Items'
 
 const HOST = 'http://localhost:5000/api'
 
@@ -39,14 +37,15 @@ const ModuleList = ({ modules, onClick }) => (
   ))
 )
 
+const moduleEmpty = {
+  name: '',
+  number: '',
+  order: '',
+}
 class ModulesContainer extends Component {
   state = {
     modules: [],
-    module: {
-      name: '',
-      number: '',
-      order: '',
-    },
+    module: moduleEmpty,
     loadingModules: false,
     failModules: null,
     modalIsOpen: false,
@@ -58,7 +57,7 @@ class ModulesContainer extends Component {
     this.load()
   }
 
-  async load() {
+  async load () {
     this.setState({
       loadingModules: true,
       failModules: null
@@ -107,7 +106,7 @@ class ModulesContainer extends Component {
       this.setState({
         loadingdModule: false,
         modalIsOpen: false,
-        module: {}
+        module: moduleEmpty
       })
       this.load()
     } catch (e) {
@@ -133,7 +132,7 @@ class ModulesContainer extends Component {
       this.setState({
         loadingdModule: false,
         modalIsOpen: false,
-        module: {}
+        module: moduleEmpty
       })
       this.load()
     } catch (e) {
@@ -151,7 +150,6 @@ class ModulesContainer extends Component {
       modalIsOpen: true,
       module: currentState.modules.find(item => item.uuid === uuid)
     }))
-
   }
 
   render () {
@@ -209,6 +207,9 @@ class ModulesContainer extends Component {
           onSave={this.onSave}
           onUpdate={this.onUpdate}
         />
+        {modules.length > 0 && (
+          <ItemsContainer modules={modules} load={() => this.load()}/>
+        )}
       </div>
     )
   }
