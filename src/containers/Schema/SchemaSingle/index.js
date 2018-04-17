@@ -24,6 +24,11 @@ const api = {
     return axios
       .patch(`${HOST}/${url}`, data)
       .then(res => res.data)
+  },
+  delete: (url) => {
+    return axios
+      .delete(`${HOST}/${url}`)
+      .then(res => res.data)
   }
 }
 
@@ -155,6 +160,31 @@ class SchemaContainer extends Component {
     }
   }
 
+  onHandleDelete = (uuid) => e => {
+    this.onDelete(uuid)
+  }
+
+  async onDelete(uuid) {
+    this.setState({
+      loadingSchema: true,
+      failSchema: null
+    })
+
+    try {
+      await api.delete(`schemas/${uuid}`)
+      this.setState({
+        loadingSchema: false,
+      })
+
+      this.props.history.push('/')
+    } catch (e) {
+      this.setState({
+        loadingSchema: false,
+        failSchema: e.message
+      })
+    }
+  }
+
   render () {
     const { schema, loadingSchema, failSchema } = this.state
 
@@ -163,9 +193,12 @@ class SchemaContainer extends Component {
         <div className={styles.FormContainer}>
           <SchemaForm
             data={schema}
-            onChange={this.onChange}
-            onSave={this.onSave}
-            onUpdate={this.onUpdate}
+            actions={{
+              onChange: this.onChange,
+              onSave: this.onSave,
+              onUpdate: this.onUpdate,
+              onDelete: this.onHandleDelete
+            }}
             loading={loadingSchema}
             error={failSchema}
           />
