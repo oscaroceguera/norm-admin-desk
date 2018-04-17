@@ -1,15 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { every } from 'lodash/collection'
-import { btnSave, btnUpdate } from './styles.css'
 
 import {
   Modal,
   TextField,
-  Button
+  ShowBtn
 } from '../../components'
-
-const showButton = (fields) => !every(fields)
 
 const ItemForm = ({
   show,
@@ -67,21 +63,10 @@ const ItemForm = ({
           required
         />
       </div>
-      <div className={data.uuid ? btnUpdate : btnSave}>
-        <Button
-          label={!data.uuid ? 'Guardar' : 'Actualizar'}
-          disabled={showButton(data)}
-          onClick={!data.uuid ? onSave : onUpdate}
-          primary
-        />
-        {data.uuid && (
-          <Button
-            label={'Eliminar'}
-            onClick={onDelete(data.uuid)}
-            secondary
-          />
-        )}
-      </div>
+      <ShowBtn
+        data={data}
+        actions={{ onSave, onUpdate, onDelete }}
+      />
     </div>
   </Modal>
 )

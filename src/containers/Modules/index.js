@@ -1,33 +1,13 @@
 import React, { Component } from 'react'
-import axios from 'axios'
 import {pick} from 'lodash/object'
 
 import styles from './styles.css'
-import AddIcon from './add.svg'
 
-import { Loading, ErrorMessage } from '../../components'
+import { Loading, ErrorMessage, Icon } from '../../components'
 import ModuleForm from './form'
 import ItemsContainer from '../Items'
 
-const HOST = 'http://localhost:5000/api'
-
-const api = {
-  get: (url) => {
-    return axios
-      .get(`${HOST}/${url}`)
-      .then(res => res.data)
-  },
-  post: (url, data) => {
-    return axios
-      .post(`${HOST}/${url}`, data)
-      .then(res => res.data)
-  },
-  put: (url, data) => {
-    return axios
-      .patch(`${HOST}/${url}`, data)
-      .then(res => res.data)
-  }
-}
+import {api} from '../../api'
 
 const ModuleList = ({ modules, onClick }) => (
   modules.map(({uuid, number, name, order}) => (
@@ -65,7 +45,6 @@ class ModulesContainer extends Component {
 
     try {
       const body = await api.get(`schemas/${this.props.id}/modules`)
-      console.log({body})
       this.setState({
         loadingModules: false,
         modules: body
@@ -142,6 +121,33 @@ class ModulesContainer extends Component {
       })
     }
   }
+
+  onHandleDelete = (uuid) => e => {
+    this.onDelete(uuid)
+  }
+
+  async onDelete(uuid) {
+    this.setState({
+      loadingdModule: true,
+      failModule: null
+    })
+
+    try {
+      await api.delete(`/modules/${uuid}`)
+      this.setState({
+        loadingdModule: false,
+        modalIsOpen: false,
+        module: moduleEmpty 
+      })
+
+      this.load()
+    } catch (e) {
+      this.setState({
+        loadingdModule: false,
+        failModule: e.message
+      })
+    }
+  }
   
   onClickModule = uuid => e => {
     e && e.preventDefault()
@@ -186,7 +192,7 @@ class ModulesContainer extends Component {
         <div className={styles.header}>
           <h3 className={styles.title}>Módulos</h3>
           <div className={styles.addBtn} onClick={this.toggleModal}>
-            <img src={AddIcon} width='16px' alt='add-icon' />
+            <Icon name='add' width='16px' />
           </div>
         </div>
         <div className={styles.list}>
@@ -206,6 +212,7 @@ class ModulesContainer extends Component {
           onChange={this.onChange}
           onSave={this.onSave}
           onUpdate={this.onUpdate}
+          onDelete={this.onHandleDelete}
         />
         {modules.length > 0 && (
           <ItemsContainer modules={modules} load={() => this.load()}/>

@@ -42,7 +42,7 @@
   margin: .5em 0;
 }
 
-.btnContainer {
+/* .btnContainer {
   margin: .5em 0;
   padding: .5em;
 }
@@ -56,4 +56,4 @@
   composes: btnContainer;
   display: flex;
   justify-content: space-around
-}
+} */

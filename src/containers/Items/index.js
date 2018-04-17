@@ -1,38 +1,12 @@
 import React, { Component } from 'react'
-import axios from 'axios'
 import { sortBy } from 'lodash/collection'
 
 import styles from './styles.css'
-import ArrowDown from './arrow-down.svg'
-import ArrowUp from './arrow-up.svg'
 
-import { Button } from '../../components'
+import { Button, Icon } from '../../components'
 import ItemForm from './form'
 
-const HOST = 'http://localhost:5000/api'
-
-const api = {
-  get: (url) => {
-    return axios
-      .get(`${HOST}/${url}`)
-      .then(res => res.data)
-  },
-  post: (url, data) => {
-    return axios
-      .post(`${HOST}/${url}`, data)
-      .then(res => res.data)
-  },
-  put: (url, data) => {
-    return axios
-      .patch(`${HOST}/${url}`, data)
-      .then(res => res.data)
-  },
-  delete: (url) => {
-    return axios
-      .delete(`${HOST}/${url}`)
-      .then(res => res.data)
-  }
-}
+import {api} from '../../api'
 
 class QuestionItem extends Component {
   state = {
@@ -53,7 +27,9 @@ class QuestionItem extends Component {
       <div className={styles.container}>
         <div className={styles.header} onClick={this.handleShow}>
           <div>{`Módulo ${module.number} - ${module.name}`}</div>
-          <div><img src={show ? ArrowUp : ArrowDown} width='16px' alt='arrow-icon' /></div>
+          <div>
+            <Icon name={show ? 'arrowUp' : 'arrowDown'} width='16px' />
+          </div>
         </div>
         {show && (
           <div className={styles.items}>

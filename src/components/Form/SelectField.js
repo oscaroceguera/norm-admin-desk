@@ -1,12 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import Icon from '../Icon'
 import styles, {
   SlcContainer,
   SlcTitle,
   SlcHero,
   SlcItem
 } from './styles.css'
-import ArrowDown from './arrow-down.svg'
 import cx from 'classnames'
 
 
@@ -106,7 +106,7 @@ class SelectField extends React.Component {
       <div className={Container} ref={i => this.slcSection = i}>
         <div className={SlcTitle} onClick={this.handleShowItems}>
           <ItemHeader title={title} valueDesc={item.desc} />
-          <img src={ArrowDown} alt='arrow'/>
+          <Icon name='arrowDownBlack' />
         </div>
         <Options
           showItems={showItems}

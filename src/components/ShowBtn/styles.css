@@ -1,0 +1,15 @@
+.btnContainer {
+  margin: .5em 0;
+  padding: .5em;
+}
+
+.btnSave {
+  composes: btnContainer;
+  text-align: center;
+}
+
+.btnUpdate {
+  composes: btnContainer;
+  display: flex;
+  justify-content: space-around
+}

@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { every } from 'lodash/collection'
 import styles from './styles.css'
-import { TextField, Button } from '../index'
+import { TextField, Button, Icon } from '../index'
 import Loading from '../Progress'
 import ErrorMessage from '../Warnings'
 
@@ -14,10 +14,21 @@ const INPUTS = [
   { title: 'Descripcion', placeholder: 'Descripción...', width: 'Large', section: 'schema', name: 'description', required: true }
 ]
 
-const SchemaForm = ({ data, onChange, onSave, onUpdate, loading, error }) => {
+const SchemaForm = ({ data, actions: { onChange, onSave, onUpdate, onDelete }, loading, error }) => {
   return (
     <div>
-      <h1 className={styles.FormTitle}>Schema Form</h1>
+      <div className={styles.FormTitle}>
+        <h1>Schema Form</h1>
+        {data.id && (
+          <div>
+            <Icon
+              name='delete'
+              width='20px'
+              onClick={onDelete(data.id)}
+            />
+          </div>
+        )}
+      </div>
       {loading
         ? <Loading />
         : (
@@ -53,9 +64,12 @@ const SchemaForm = ({ data, onChange, onSave, onUpdate, loading, error }) => {
 
 SchemaForm.propTypes = {
   data: PropTypes.object.isRequired,
-  onChange: PropTypes.func.isRequired,
-  onSave: PropTypes.func.isRequired,
-  onUpdate: PropTypes.func.isRequired,
+  actions: PropTypes.shape({
+    onChange: PropTypes.func.isRequired,
+    onSave: PropTypes.func.isRequired,
+    onUpdate: PropTypes.func.isRequired,
+    onDelete: PropTypes.func.isRequired
+  }),
   loading: PropTypes.bool.isRequired,
   error: PropTypes.string
 }

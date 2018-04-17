@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styles from './styles.css'
-import CloseIcon from './close.svg'
+import Icon from '../Icon'
 
 function Modal (props) {
   if (!props.show) {
@@ -16,7 +16,7 @@ function Modal (props) {
             {props.title}
           </h3>
           <div className={styles.close} onClick={props.onClose}>
-            <img src={CloseIcon} width='14px' alt='close-icon' />
+            <Icon name='close' width='14px' />
           </div>
         </div>
         {props.children}

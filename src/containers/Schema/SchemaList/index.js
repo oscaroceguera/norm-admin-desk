@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
-import axios from 'axios'
-import styles from './styles.css'
 import { withRouter } from 'react-router-dom'
 
-import { Loading, ErrorMessage } from '../../../components'
-import AddIcon from './plus.svg'
+import styles from './styles.css'
 
-const HOST = 'http://localhost:5000/api'
+import { Loading, ErrorMessage, Icon } from '../../../components'
+
+import {api} from '../../../api'
 
 const SchemaItem = ({ schema, onClick }) => (
   <div className={styles.item} onClick={onClick(schema.uuid)}>
@@ -18,14 +17,6 @@ const SchemaItem = ({ schema, onClick }) => (
     </div>
   </div>
 )
-
-const api = {
-  get: (url) => {
-    return axios
-      .get(`${HOST}/${url}`)
-      .then(res => res.data)
-  }
-}
 
 class SchemaListContainer extends Component {
   state = {
@@ -101,7 +92,7 @@ class SchemaListContainer extends Component {
         {noItems}
         <div className={styles.items}>{ITEMS}</div>
         <div className={styles.addSchema} onClick={this.addSchema}>
-          <img src={AddIcon} alt='add-icon' />
+          <Icon name='plus' width='50px' />
         </div>
       </div>
     )

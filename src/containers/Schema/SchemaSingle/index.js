@@ -1,31 +1,12 @@
 import React, {Component} from 'react'
 import { withRouter } from 'react-router-dom'
-import axios from 'axios'
 
 import styles from './styles.css'
 
 import { SchemaForm } from '../../../components'
 import Modules from '../../Modules'
 
-const HOST = 'http://localhost:5000/api'
-
-const api = {
-  post: (url, data) => {
-    return axios
-      .post(`${HOST}/${url}`, data)
-      .then(res => res.data)
-  },
-  get: (url) => {
-    return axios
-      .get(`${HOST}/${url}`)
-      .then(res => res.data)
-  },
-  put: (url, data) => {
-    return axios
-      .patch(`${HOST}/${url}`, data)
-      .then(res => res.data)
-  }
-}
+import { api } from '../../../api'
 
 class SchemaContainer extends Component {
   state = {
@@ -155,6 +136,31 @@ class SchemaContainer extends Component {
     }
   }
 
+  onHandleDelete = (uuid) => e => {
+    this.onDelete(uuid)
+  }
+
+  async onDelete(uuid) {
+    this.setState({
+      loadingSchema: true,
+      failSchema: null
+    })
+
+    try {
+      await api.delete(`schemas/${uuid}`)
+      this.setState({
+        loadingSchema: false,
+      })
+
+      this.props.history.push('/')
+    } catch (e) {
+      this.setState({
+        loadingSchema: false,
+        failSchema: e.message
+      })
+    }
+  }
+
   render () {
     const { schema, loadingSchema, failSchema } = this.state
 
@@ -163,9 +169,12 @@ class SchemaContainer extends Component {
         <div className={styles.FormContainer}>
           <SchemaForm
             data={schema}
-            onChange={this.onChange}
-            onSave={this.onSave}
-            onUpdate={this.onUpdate}
+            actions={{
+              onChange: this.onChange,
+              onSave: this.onSave,
+              onUpdate: this.onUpdate,
+              onDelete: this.onHandleDelete
+            }}
             loading={loadingSchema}
             error={failSchema}
           />

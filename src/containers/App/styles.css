@@ -5,5 +5,6 @@
   font-family: 'Roboto', sans-serif;
   background: lightBlue;
   min-height: 100vh;
+  border: 1px solid lightBlue;
 }
 
