@@ -1,16 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { every } from 'lodash/collection'
 
 import {
   Loading,
   ErrorMessage,
   Modal,
   TextField,
-  Button
+  ShowBtn
 } from '../../components'
-
-const showButton = (fields) => !every(fields)
 
 const ModuleForm = ({
   show,
@@ -20,7 +17,8 @@ const ModuleForm = ({
   data,
   onChange,
   onSave,
-  onUpdate
+  onUpdate,
+  onDelete
 }) => (
   <Modal show={show} onClose={onClose} title={'Agregar módulo'}>
     {loadingdModule
@@ -54,14 +52,10 @@ const ModuleForm = ({
             required
           />
           {failModule && <ErrorMessage msg={`Agregar módulo: ${failModule}`} />}
-          <div style={{ margin: '.5em 0', padding: '.5em', textAlign: 'center' }}>
-            <Button
-              label={!data.uuid ? 'Guardar' : 'Actualizar'}
-              disabled={showButton(data)}
-              onClick={!data.uuid ? onSave : onUpdate}
-              primary
-            />
-          </div>
+          <ShowBtn
+            data={data}
+            actions={{ onSave, onUpdate, onDelete }}
+          />
         </div>
       )
     }
@@ -76,7 +70,8 @@ ModuleForm.propTypes = {
   data: PropTypes.object.isRequired,
   onChange: PropTypes.func.isRequired,
   onSave: PropTypes.func.isRequired,
-  onUpdate: PropTypes.func.isRequired
+  onUpdate: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired
 }
 
 export default ModuleForm

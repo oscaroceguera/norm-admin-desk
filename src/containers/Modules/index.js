@@ -26,6 +26,11 @@ const api = {
     return axios
       .patch(`${HOST}/${url}`, data)
       .then(res => res.data)
+  },
+  delete: (url) => {
+    return axios
+      .delete(`${HOST}/${url}`)
+      .then(res => res.data)
   }
 }
 
@@ -65,7 +70,6 @@ class ModulesContainer extends Component {
 
     try {
       const body = await api.get(`schemas/${this.props.id}/modules`)
-      console.log({body})
       this.setState({
         loadingModules: false,
         modules: body
@@ -142,6 +146,33 @@ class ModulesContainer extends Component {
       })
     }
   }
+
+  onHandleDelete = (uuid) => e => {
+    this.onDelete(uuid)
+  }
+
+  async onDelete(uuid) {
+    this.setState({
+      loadingdModule: true,
+      failModule: null
+    })
+
+    try {
+      await api.delete(`/modules/${uuid}`)
+      this.setState({
+        loadingdModule: false,
+        modalIsOpen: false,
+        module: moduleEmpty 
+      })
+
+      this.load()
+    } catch (e) {
+      this.setState({
+        loadingdModule: false,
+        failModule: e.message
+      })
+    }
+  }
   
   onClickModule = uuid => e => {
     e && e.preventDefault()
@@ -206,6 +237,7 @@ class ModulesContainer extends Component {
           onChange={this.onChange}
           onSave={this.onSave}
           onUpdate={this.onUpdate}
+          onDelete={this.onHandleDelete}
         />
         {modules.length > 0 && (
           <ItemsContainer modules={modules} load={() => this.load()}/>

@@ -4,6 +4,7 @@ import { SchemaForm } from './Schema'
 import Loading from './Progress'
 import ErrorMessage from './Warnings'
 import Modal from './Modal'
+import ShowBtn from './ShowBtn'
 
 export {
   Button,
@@ -14,5 +15,6 @@ export {
   SchemaForm,
   Loading,
   ErrorMessage,
-  Modal
+  Modal,
+  ShowBtn
 }
