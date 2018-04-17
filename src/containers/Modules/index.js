@@ -2,9 +2,8 @@ import React, { Component } from 'react'
 import {pick} from 'lodash/object'
 
 import styles from './styles.css'
-import AddIcon from './add.svg'
 
-import { Loading, ErrorMessage } from '../../components'
+import { Loading, ErrorMessage, Icon } from '../../components'
 import ModuleForm from './form'
 import ItemsContainer from '../Items'
 
@@ -193,7 +192,7 @@ class ModulesContainer extends Component {
         <div className={styles.header}>
           <h3 className={styles.title}>Módulos</h3>
           <div className={styles.addBtn} onClick={this.toggleModal}>
-            <img src={AddIcon} width='16px' alt='add-icon' />
+            <Icon name='add' width='16px' />
           </div>
         </div>
         <div className={styles.list}>

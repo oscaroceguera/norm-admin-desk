@@ -5,6 +5,7 @@ import Loading from './Progress'
 import ErrorMessage from './Warnings'
 import Modal from './Modal'
 import ShowBtn from './ShowBtn'
+import Icon from './Icon'
 
 export {
   Button,
@@ -16,5 +17,6 @@ export {
   Loading,
   ErrorMessage,
   Modal,
-  ShowBtn
+  ShowBtn,
+  Icon
 }

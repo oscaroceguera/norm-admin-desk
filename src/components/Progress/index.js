@@ -1,15 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styles from './styles.css'
-import LoadingIcon from './loading.svg'
+import Icon from '../Icon'
 
 const Loading = ({ width = '50px' }) => (
   <div className={styles.container}>
-    <img
+    <Icon
       className={styles.loader}
       width={width}
-      src={LoadingIcon}
-      alt='loading'
+      name='loading'
     />
   </div>
 )

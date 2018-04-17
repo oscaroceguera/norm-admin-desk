@@ -2,7 +2,6 @@ import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { withKnobs, boolean, text, select } from '@storybook/addon-knobs'
 import { TextField, SelectField, Checkbox, AutoComplete } from '../components'
-import './styles.css'
 
 const { label, options, defaultValue } = {
   label: 'Widths',

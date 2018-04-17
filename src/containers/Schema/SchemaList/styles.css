@@ -72,7 +72,6 @@
 
 .addSchema {
   cursor: pointer;
-  width: 50px;
   position: fixed;
   right: 2em;
   bottom: 1.5em;

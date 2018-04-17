@@ -2,10 +2,8 @@ import React, { Component } from 'react'
 import { sortBy } from 'lodash/collection'
 
 import styles from './styles.css'
-import ArrowDown from './arrow-down.svg'
-import ArrowUp from './arrow-up.svg'
 
-import { Button } from '../../components'
+import { Button, Icon } from '../../components'
 import ItemForm from './form'
 
 import {api} from '../../api'
@@ -29,7 +27,9 @@ class QuestionItem extends Component {
       <div className={styles.container}>
         <div className={styles.header} onClick={this.handleShow}>
           <div>{`Módulo ${module.number} - ${module.name}`}</div>
-          <div><img src={show ? ArrowUp : ArrowDown} width='16px' alt='arrow-icon' /></div>
+          <div>
+            <Icon name={show ? 'arrowUp' : 'arrowDown'} width='16px' />
+          </div>
         </div>
         {show && (
           <div className={styles.items}>

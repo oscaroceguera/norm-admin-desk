@@ -2,10 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { every } from 'lodash/collection'
 import styles from './styles.css'
-import { TextField, Button } from '../index'
+import { TextField, Button, Icon } from '../index'
 import Loading from '../Progress'
 import ErrorMessage from '../Warnings'
-import DeleteIcon from './delete.svg'
 
 const showButton = (fields) => !every(fields)
 
@@ -22,9 +21,8 @@ const SchemaForm = ({ data, actions: { onChange, onSave, onUpdate, onDelete }, l
         <h1>Schema Form</h1>
         {data.id && (
           <div>
-            <img
-              src={DeleteIcon}
-              alt='delete-icon'
+            <Icon
+              name='delete'
               width='20px'
               onClick={onDelete(data.id)}
             />

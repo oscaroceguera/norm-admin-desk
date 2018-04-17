@@ -2,9 +2,8 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 
 import styles from './styles.css'
-import AddIcon from './plus.svg'
 
-import { Loading, ErrorMessage } from '../../../components'
+import { Loading, ErrorMessage, Icon } from '../../../components'
 
 import {api} from '../../../api'
 
@@ -93,7 +92,7 @@ class SchemaListContainer extends Component {
         {noItems}
         <div className={styles.items}>{ITEMS}</div>
         <div className={styles.addSchema} onClick={this.addSchema}>
-          <img src={AddIcon} alt='add-icon' />
+          <Icon name='plus' width='50px' />
         </div>
       </div>
     )
