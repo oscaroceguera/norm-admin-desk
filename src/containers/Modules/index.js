@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import axios from 'axios'
 import {pick} from 'lodash/object'
 
 import styles from './styles.css'
@@ -9,30 +8,7 @@ import { Loading, ErrorMessage } from '../../components'
 import ModuleForm from './form'
 import ItemsContainer from '../Items'
 
-const HOST = 'http://localhost:5000/api'
-
-const api = {
-  get: (url) => {
-    return axios
-      .get(`${HOST}/${url}`)
-      .then(res => res.data)
-  },
-  post: (url, data) => {
-    return axios
-      .post(`${HOST}/${url}`, data)
-      .then(res => res.data)
-  },
-  put: (url, data) => {
-    return axios
-      .patch(`${HOST}/${url}`, data)
-      .then(res => res.data)
-  },
-  delete: (url) => {
-    return axios
-      .delete(`${HOST}/${url}`)
-      .then(res => res.data)
-  }
-}
+import {api} from '../../api'
 
 const ModuleList = ({ modules, onClick }) => (
   modules.map(({uuid, number, name, order}) => (
