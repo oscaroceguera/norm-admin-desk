@@ -10,21 +10,21 @@ UI: inspirada en Material-ui
 
 ## Version
 
-v1: 
+Reto 1: 
 
 > Se usará una api-fake para simular los servicios
 
-* CRUD de norma
-* CRUD de modulos
-* CRUD de items
+* ~~CRUD de norma~~
+* ~~CRUD de modulos~~
+* ~~CRUD de items~~
 
-v2:
+Reto 2:
 
-* Conectar con API
+* ~~Conectar con API~~
 * Decargar hoja de calculo
 * Descargar pdf
 
-v3:
+Reto 3:
 
 * Sesión de usuario
 * Adminstración de usuario
