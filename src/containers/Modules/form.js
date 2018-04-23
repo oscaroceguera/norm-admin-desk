@@ -12,7 +12,7 @@ import {
 const ModuleForm = ({
   show,
   onClose,
-  loadingdModule,
+  loadingModule,
   failModule,
   data,
   onChange,
@@ -21,7 +21,7 @@ const ModuleForm = ({
   onDelete
 }) => (
   <Modal show={show} onClose={onClose} title={'Agregar módulo'}>
-    {loadingdModule
+    {loadingModule
       ? <Loading />
       : (
         <div>
@@ -65,7 +65,7 @@ const ModuleForm = ({
 ModuleForm.propTypes = {
   show: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
-  loadingdModule: PropTypes.bool.isRequired,
+  loadingModule: PropTypes.bool.isRequired,
   failModule: PropTypes.string,
   data: PropTypes.object.isRequired,
   onChange: PropTypes.func.isRequired,

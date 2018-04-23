@@ -18,7 +18,7 @@ const SchemaForm = ({ data, actions: { onChange, onSave, onUpdate, onDelete }, l
   return (
     <div>
       <div className={styles.FormTitle}>
-        <h1>Schema Form</h1>
+        <h1>Esquema</h1>
         {data.id && (
           <div>
             <Icon
@@ -40,7 +40,8 @@ const SchemaForm = ({ data, actions: { onChange, onSave, onUpdate, onDelete }, l
                   title={title}
                   placeholder={placeholder}
                   width={width}
-                  onChange={onChange(section, name)}
+                  name={name}
+                  onChange={onChange(name)}
                   value={data[name]}
                   required={required}
                 />

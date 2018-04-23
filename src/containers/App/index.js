@@ -1,27 +1,30 @@
-import React, { Component } from 'react'
+import React from 'react'
 import styles from './styles.css'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
+import { ConnectedRouter } from 'react-router-redux'
+
 import {
   SchemaListContainer,
-  SchemaContainer,
-  NoMatch
+  SchemaContainer
 } from '../'
 
-class App extends Component {
-  render () {
-    return (
-      <div className={styles.App}>
-        <Router>
-          <Switch>
-            <Route exact path='/' component={SchemaListContainer} />
-            <Route exact path='/schema' component={SchemaContainer} />
-            <Route exact path='/schema/:uuid' component={SchemaContainer} />
-            <Route component={NoMatch} />
-          </Switch>
-        </Router>
-      </div>
-    )
-  }
+import { NoMatch } from '../../components'
+
+const App = props => {
+  const { history } = props
+
+  return (
+    <div className={styles.App}>
+      <ConnectedRouter history={history}>
+        <Switch>
+          <Route exact path='/' component={SchemaListContainer} />
+          <Route exact path='/schema' component={SchemaContainer} />
+          <Route exact path='/schema/:uuid' component={SchemaContainer} />
+          <Route component={NoMatch} />
+        </Switch>
+      </ConnectedRouter>
+    </div>
+  )
 }
 
 export default App

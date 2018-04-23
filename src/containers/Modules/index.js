@@ -1,5 +1,9 @@
 import React, { Component } from 'react'
-import {pick} from 'lodash/object'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+
+import * as moduleActions from '../../reducers/module'
+import * as modulesActions from '../../reducers/modules'
 
 import styles from './styles.css'
 
@@ -7,7 +11,6 @@ import { Loading, ErrorMessage, Icon } from '../../components'
 import ModuleForm from './form'
 import ItemsContainer from '../Items'
 
-import {api} from '../../api'
 
 const ModuleList = ({ modules, onClick }) => (
   modules.map(({uuid, number, name, order}) => (
@@ -17,157 +20,54 @@ const ModuleList = ({ modules, onClick }) => (
   ))
 )
 
-const moduleEmpty = {
-  name: '',
-  number: '',
-  order: '',
-}
 class ModulesContainer extends Component {
-  state = {
-    modules: [],
-    module: moduleEmpty,
-    loadingModules: false,
-    failModules: null,
-    modalIsOpen: false,
-    loadingdModule: false,
-    failModule: null
-  }
-
   componentWillMount() {
-    this.load()
-  }
-
-  async load () {
-    this.setState({
-      loadingModules: true,
-      failModules: null
-    })
-
-    try {
-      const body = await api.get(`schemas/${this.props.id}/modules`)
-      this.setState({
-        loadingModules: false,
-        modules: body
-      })
-    } catch (e) {
-      this.setState({
-        loadingModules: false,
-        failModules: e.message
-      })
-    }
+    this.props.fetchModules(this.props.id)
   }
 
   toggleModal = () => {
-    this.setState((prevState) => ({
-      modalIsOpen: !prevState.modalIsOpen
-    }))
+    this.props.showModal()
   }
 
   onChange = field => e => {
     e && e.preventDefault()
 
-    this.setState({
-      module: {
-        ...this.state.module,
-        [field]: e.target.value
-      }
-    })
+    const payload = {
+      name: field,
+      value: e.target.value
+    }
+    this.props.setModuleValues(payload)
   }
 
-  onSave = async () => {
-    this.setState({
-      loadingdModule: true,
-      failModule: null
-    })
-
-    try {
-      await api.post(`/schemas/${this.props.id}/modules`, this.state.module)
-      this.setState({
-        loadingdModule: false,
-        modalIsOpen: false,
-        module: moduleEmpty
-      })
-      this.load()
-    } catch (e) {
-      this.setState({
-        loadingdModule: false,
-        failModule: e.message
-      })
-    }
+  onSave = (e) => {
+    e && e.preventDefault()
+    this.props.saveModule(this.props.id)
   }
   
-  onUpdate = async () => {
-    const { module } = this.state
-    
-    const data = pick(module, ['name', 'order', 'number'])
-
-    this.setState({
-      loadingdModule: true,
-      failModule: null
-    })
-
-    try {
-      await api.put(`/modules/${module.uuid}`, data)
-      this.setState({
-        loadingdModule: false,
-        modalIsOpen: false,
-        module: moduleEmpty
-      })
-      this.load()
-    } catch (e) {
-      this.setState({
-        loadingdModule: false,
-        failModule: e.message
-      })
-    }
+  onUpdate = (e) => {
+    e && e.preventDefault()
+    this.props.updateModule()
   }
 
   onHandleDelete = (uuid) => e => {
-    this.onDelete(uuid)
+    this.props.deleteModule(uuid)
   }
 
-  async onDelete(uuid) {
-    this.setState({
-      loadingdModule: true,
-      failModule: null
-    })
-
-    try {
-      await api.delete(`/modules/${uuid}`)
-      this.setState({
-        loadingdModule: false,
-        modalIsOpen: false,
-        module: moduleEmpty 
-      })
-
-      this.load()
-    } catch (e) {
-      this.setState({
-        loadingdModule: false,
-        failModule: e.message
-      })
-    }
-  }
-  
   onClickModule = uuid => e => {
     e && e.preventDefault()
-  
-    this.setState((currentState) => ({
-      modalIsOpen: true,
-      module: currentState.modules.find(item => item.uuid === uuid)
-    }))
+    this.props.selectModule(uuid)
   }
 
   render () {
     const {
-      loadingModules,
-      failModules,
-      modules,
       modalIsOpen,
       module,
-      loadingdModule,
-      failModule
-    } = this.state
+      loadingModule,
+      failModule,
+      loadingModules,
+      failModules,
+      modules
+    } = this.props
 
     let noModules
 
@@ -206,7 +106,7 @@ class ModulesContainer extends Component {
           show={modalIsOpen}
           onClose={this.toggleModal}
           title={'Agregar módulo'}
-          loadingdModule={loadingdModule}
+          loadingModule={loadingModule}
           failModule={failModule}
           data={module}
           onChange={this.onChange}
@@ -215,11 +115,34 @@ class ModulesContainer extends Component {
           onDelete={this.onHandleDelete}
         />
         {modules.length > 0 && (
-          <ItemsContainer modules={modules} load={() => this.load()}/>
+          <ItemsContainer
+            modules={modules}
+          />
         )}
       </div>
     )
   }
 }
 
-export default ModulesContainer
+const mapToStateProps = state => {
+  const { modalIsOpen, module, loadingModule, failModule } = state.module.toJS()
+  const { loadingModules, failModules, modules } = state.modules.toJS()
+  return {
+    modalIsOpen,
+    module,
+    loadingModule,
+    failModule,
+    loadingModules,
+    failModules,
+    modules
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({
+    ...moduleActions,
+    ...modulesActions
+  }, dispatch)
+}
+
+export default connect(mapToStateProps, mapDispatchToProps)(ModulesContainer)

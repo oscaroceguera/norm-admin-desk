@@ -1,4 +1,4 @@
-@value colors: "../../../stylesheets/ui-color-palette.css";
+@value colors: "../../stylesheets/ui-color-palette.css";
 @value grey, indigo, grey300, grey800 from colors;
 
 .zeroItemsMsg {
@@ -7,6 +7,7 @@
   color: indigo;
   font-size: 2em;
 }
+
 
 .container {
   position: relative;
@@ -32,6 +33,7 @@
     width: 70%;
   }
 }
+
 
 .item {
   background: white;
