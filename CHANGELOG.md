@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.2.0] - [2018-04-23]
+### Added
+- Redux
+- Redux-sagas
+- History for routes
+- Reac-router-redux
+
 ## [0.1.0] - [2018-04-17]
 ### Added
 - Create Schema
