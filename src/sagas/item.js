@@ -1,4 +1,4 @@
-import { takeLatest, call, put, select, all } from 'redux-saga/effects'
+import { takeLatest, select, all } from 'redux-saga/effects'
 import * as ITEM from '../reducers/item'
 import { fetchModules } from '../reducers/modules'
 
