@@ -9,6 +9,7 @@ import ArrowDownBlack from './arrow-down-black.svg'
 import ArrowUp from './arrow-up.svg'
 import Close from './close.svg'
 import Loading from './loading.svg'
+import NoMatch from './url-fail.svg'
 
 const ICONS = {
   delete: Delete,
@@ -18,7 +19,8 @@ const ICONS = {
   arrowUp: ArrowUp,
   arrowDownBlack: ArrowDownBlack,
   close: Close,
-  loading: Loading
+  loading: Loading,
+  noMatch: NoMatch
 }
 
 const Icon = ({ name, width, onClick, className }) => (

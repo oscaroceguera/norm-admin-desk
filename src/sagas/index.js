@@ -1,7 +1,13 @@
-import {sagas as sagaA} from './SagaA'
-import {sagas as sagaB} from './SagaB'
+import { sagas as schemasList } from './schemas'
+import { sagas as schema } from './schema'
+import { sagas as modules } from './modules'
+import { sagas as module } from './module'
+import { sagas as item } from './item'
 
 export default [
-  ...sagaA,
-  ...sagaB
+  ...schemasList,
+  ...schema,
+  ...modules,
+  ...module,
+  ...item
 ]

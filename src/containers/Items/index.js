@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 import { sortBy } from 'lodash/collection'
+
+import * as itemActions from '../../reducers/item'
 
 import styles from './styles.css'
 
 import { Button, Icon } from '../../components'
 import ItemForm from './form'
-
-import {api} from '../../api'
 
 class QuestionItem extends Component {
   state = {
@@ -69,150 +71,45 @@ const ModulesList = (props) => {
   })
 }
 
-const itemEmpty = {
-  question: '',
-  comment: '',
-  value: '',
-  number: '',
-  order: 0
-}
 
 class ItemsContainer extends Component {
-  state = {
-    loadingItem: false,
-    failItem: null,
-    moduleId: '',
-    modalIsOpen: false,
-    item: itemEmpty
-  }
-
   showForm = (uuid) =>  (e) => {
     e && e.preventDefault()
-
-    this.setState({
-      moduleId: uuid,
-      modalIsOpen: true
-    })
+    this.props.showForm(uuid)
   }
 
   toggleModal = (e) => {
     e && e.preventDefault()
-
-    this.setState((prevState) => ({
-      modalIsOpen: !prevState.modalIsOpen,
-      moduleId: '',
-      item: itemEmpty
-    }))
+    this.props.toggleModal()
   }
 
   onChange = (field) => e => {
-    this.setState({
-      item: {
-        ...this.state.item,
-        [field]: e.target.value
-      }
-    })
+    const data = {
+      name: field,
+      value: e.target.value
+    }
+    this.props.setValue(data)
   }
 
-  onSave = async (e) => {
-    this.setState({
-      loadingItem: true,
-      failItem: null
-    })
-
-    try {
-      await api.post(`/modules/${this.state.moduleId}/items`, this.state.item)
-
-      this.setState({
-        loadingItem: false,
-        failItem: null,
-        modalIsOpen: false,
-        item: itemEmpty
-      })
-
-      this.props.load()
-    } catch (e) {
-      this.setState({
-        loadingItem: false,
-        failItem: e.message
-      })
-    }
+  onSave = (e) => {
+    this.props.saveItem()
   }
 
-  onUpdate = async () => {
-    const { item } = this.state
-
-    this.setState({
-      loadingItem: true,
-      failItem: null
-    })
-
-    try {
-      await api.put(`/items/${item.uuid}`, item)
-
-      this.setState({
-        loadingItem: false,
-        failItem: null,
-        modalIsOpen: false,
-        item: itemEmpty
-      })
-
-      this.props.load()
-    } catch (e) {
-      this.setState({
-        loadingItem: false,
-        failItem: e.message
-      })
-    }
+  onUpdate = () => {
+    this.props.itemUpdate()
   }
 
   onHandleDelete = (uuid) => e => {
-    this.onDelete(uuid)
-  }
-  
-  async onDelete(uuid) {
-    this.setState({
-      loadingItem: true,
-      failItem: null
-    })
-
-    try {
-      await api.delete(`/items/${uuid}`)
-
-      this.setState({
-        loadingItem: false,
-        failItem: null,
-        modalIsOpen: false,
-        item: itemEmpty
-      })
-
-      this.props.load()
-    } catch (e) {
-      this.setState({
-        loadingItem: false,
-        failItem: e.message
-      })
-    }
+    this.props.itemDelete(uuid)
   }
 
   onClickItem = item => e => {
     e && e.preventDefault()
-
-    this.setState({
-      item: {
-        uuid: item.uuid,
-        question: item.question,
-        comment: item.comment,
-        value: item.value,
-        number: item.number,
-        order: item.order
-      },
-      modalIsOpen: true
-    })
+    this.props.itemDetail(item)
   }
 
   render() {
-    const { modalIsOpen, item } = this.state
+    const { modalIsOpen, item } = this.props
 
     return (
       <div>
@@ -236,4 +133,19 @@ class ItemsContainer extends Component {
   }
 }
 
-export default ItemsContainer
+const mapToStateProps = (state, props) => {
+  const { modalIsOpen, item } = state.item.toJS()
+  return {
+    modalIsOpen,
+    item,
+    modules: props.modules
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({
+    ...itemActions
+  }, dispatch)
+}
+
+export default connect(mapToStateProps, mapDispatchToProps)(ItemsContainer)

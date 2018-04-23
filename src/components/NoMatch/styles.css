@@ -1,0 +1,8 @@
+.container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin: 5em;
+  align-items: center;
+  color: #424242;
+}

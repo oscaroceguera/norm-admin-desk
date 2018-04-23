@@ -1,52 +1,14 @@
 import React, { Component } from 'react'
-import { withRouter } from 'react-router-dom'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 
-import styles from './styles.css'
+import * as schemasActions from '../../../reducers/schemas'
 
-import { Loading, ErrorMessage, Icon } from '../../../components'
-
-import {api} from '../../../api'
-
-const SchemaItem = ({ schema, onClick }) => (
-  <div className={styles.item} onClick={onClick(schema.uuid)}>
-    <p>{schema.name}</p>
-    <div>
-      <b>Versión: </b> <label>{schema.version}</label> <br />
-      <b>Descripción: </b> <br />
-      <label>{schema.description}</label>
-    </div>
-  </div>
-)
+import { Schemas } from '../../../components'
 
 class SchemaListContainer extends Component {
-  state = {
-    loading: false,
-    fail: null,
-    schemas: []
-  }
-
   componentWillMount() {
-    this.load()
-  }
-
-  async load() {
-    this.setState({
-      loading: true,
-      fail: false
-    })
-
-    try {
-      const body = await api.get('schemas')
-      this.setState({
-        loading: false,
-        schemas: body
-      })
-    } catch (e) {
-      this.setState({
-        loading: false,
-        fail: e.message
-      })
-    }
+    this.props.fetchSchemaList()
   }
 
   schemaDetail = uuid => e => {
@@ -60,43 +22,35 @@ class SchemaListContainer extends Component {
   }
 
   render () {
-    const { loading, fail, schemas } = this.state
-    let noItems
-
-    if (loading) {
-      return <Loading />
-    }
-
-    if (fail) {
-      return <ErrorMessage msg={fail} />
-    }
-
-    if (schemas.length === 0) {
-      noItems = (
-        <p className={styles.zeroItemsMsg}>
-          ¡Aún no hay esquemas registrados!
-        </p>
-      )
-    }
-
-    const ITEMS = schemas.map(schema => (
-      <SchemaItem
-        key={schema.uuid}
-        schema={schema}
-        onClick={this.schemaDetail}
-      />
-    ))
+    const { loading, fail, schemas } = this.props
 
     return (
-      <div className={styles.container}>
-        {noItems}
-        <div className={styles.items}>{ITEMS}</div>
-        <div className={styles.addSchema} onClick={this.addSchema}>
-          <Icon name='plus' width='50px' />
-        </div>
-      </div>
+      <Schemas
+        schemas={schemas}
+        addSchema={this.addSchema}
+        schemaDetail={this.schemaDetail}
+        isLoading={loading}
+        error={fail}
+      />
     )
   }
 }
 
-export default withRouter(SchemaListContainer)
+const mapStateToProps = state => {
+  return {
+    schemas: state.schemas.toJS().schemas,
+    loading: state.schemas.toJS().loading,
+    fail: state.schemas.toJS().fail
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({
+    ...schemasActions
+  }, dispatch)
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SchemaListContainer)
