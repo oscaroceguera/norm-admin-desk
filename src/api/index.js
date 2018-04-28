@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const apiHost = process.env.API_HOST || 'http://localhost:5000/api'
-
+console.log('apiHost', apiHost)
 export const api = {
   get: (url) => {
     return axios
