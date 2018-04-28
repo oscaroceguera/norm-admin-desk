@@ -1,26 +1,30 @@
 import axios from 'axios'
 
-const HOST = 'http://localhost:5000/api'
+let API_HOST = 'http://localhost:5000/api'
+
+if (process.env.NODE_ENV === 'production') {
+  API_HOST = 'https://blooming-ravine-18324.herokuapp.com/api'
+}
 
 export const api = {
   get: (url) => {
     return axios
-      .get(`${HOST}/${url}`)
+      .get(`${API_HOST}/${url}`)
       .then(res => res.data)
   },
   post: (url, data) => {
     return axios
-      .post(`${HOST}/${url}`, data)
+      .post(`${API_HOST}/${url}`, data)
       .then(res => res.data)
   },
   put: (url, data) => {
     return axios
-      .patch(`${HOST}/${url}`, data)
+      .patch(`${API_HOST}/${url}`, data)
       .then(res => res.data)
   },
   delete: (url) => {
     return axios
-      .delete(`${HOST}/${url}`)
+      .delete(`${API_HOST}/${url}`)
       .then(res => res.data)
   }
 }
