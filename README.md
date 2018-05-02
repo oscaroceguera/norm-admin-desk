@@ -22,7 +22,7 @@ Reto 2:
 
 * ~~Conectar con API~~
 * Decargar hoja de calculo
-* Descargar pdf
+* ~~Descargar pdf~~
 
 Reto 3:
 

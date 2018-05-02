@@ -145,7 +145,18 @@ export default function module (state = initalState, action) {
         fail: action.payload.error
       })
     case SHOW_MODAL:
-      return state.set('modalIsOpen', !state.get('modalIsOpen'))
+      if (state.get('modalIsOpen')) {
+        return state.merge({
+          modalIsOpen: false,
+          module: {
+            name: '',
+            number: '',
+            order: ''
+          }
+        })
+      }
+
+      return state.set('modalIsOpen', true)
     case DELETE_MODULE_SUCCESS:
     case UPDATE_MODULE_SUCCESS:
     case SAVE_MODULE_SUCCESS:
