@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-let apiHost = process.env.API_HOST
+const apiHost = process.env.API_HOST
 
 export const api = {
   get: (url) => {
@@ -22,5 +22,21 @@ export const api = {
     return axios
       .delete(`${apiHost}/${url}`)
       .then(res => res.data)
+  },
+  download: (uri, name) => {
+    return axios({
+      url: `${apiHost}/${uri}`,
+      method: 'GET',
+      responseType: 'blob'
+    }).then(response => {
+      const url = window.URL.createObjectURL(new Blob([response.data]))
+      const link = document.createElement('a')
+
+      link.href = url
+      link.setAttribute('download', `${name}.pdf`)
+
+      document.body.appendChild(link)
+      link.click()
+    })
   }
 }

@@ -5,6 +5,11 @@ export const FETCH_SCHEMA_LIST_LOADING = 'src/schema/FETCH_SCHEMA_LIST_LOADING'
 export const FETCH_SCHEMA_LIST_SUCCESS = 'src/schema/FETCH_SCHEMA_LIST_SUCCESS'
 export const FETCH_SCHEMA_LIST_FAIL = 'src/schema/FETCH_SCHEMA_LIST_FAIL'
 
+export const DOWNLOAD_PDF = 'src/schema/DOWNLOAD_PDF'
+export const DOWNLOAD_PDF_DOWNLOADING = 'src/schema/DOWNLOAD_PDF_DOWNLOADING'
+export const DOWNLOAD_PDF_SUCCESS = 'src/schema/DOWNLOAD_PDF_SUCCESS'
+export const DOWNLOAD_PDF_FAIL = 'src/schema/DOWNLOAD_PDF_FAIL'
+
 export function fetchSchemaList () {
   return {
     type: FETCH_SCHEMA_LIST
@@ -31,10 +36,43 @@ export function fetchSchemaListFail (error) {
   }
 }
 
+export function downloadPdf (name, uuid) {
+  return {
+    type: DOWNLOAD_PDF,
+    payload: {
+      name,
+      uuid
+    }
+  }
+}
+
+export function downloadPdfDownloading () {
+  return {
+    type: DOWNLOAD_PDF_DOWNLOADING
+  }
+}
+
+export function downloadPdfSuccess () {
+  return {
+    type: DOWNLOAD_PDF_SUCCESS
+  }
+}
+
+export function downloadPdfFail (error) {
+  return {
+    type: DOWNLOAD_PDF_FAIL,
+    payload: {
+      error
+    }
+  }
+}
+
 const initialState = fromJS({
   schemas: [],
   loading: false,
-  fail: null
+  fail: null,
+  downloading: false,
+  downloadingFail: null
 })
 
 export default function schemas (state = initialState, action) {
@@ -53,6 +91,20 @@ export default function schemas (state = initialState, action) {
       return state.merge({
         fail: action.error,
         loading: false
+      })
+    case DOWNLOAD_PDF_DOWNLOADING:
+      return state.merge({
+        downloading: true,
+        downloadingFail: null
+      })
+    case DOWNLOAD_PDF_SUCCESS:
+      return state.merge({
+        downloading: false
+      })
+    case DOWNLOAD_PDF_FAIL:
+      return state.merge({
+        downloading: false,
+        downloadingFail: action.payload.error
       })
     default:
       return state
