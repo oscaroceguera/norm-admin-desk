@@ -1,10 +1,6 @@
 import axios from 'axios'
 
-let apiHost = 'http://localhost:5000/api'
-
-if (process.env.NODE_ENV === 'production') {
-  apiHost = 'https://blooming-ravine-18324.herokuapp.com/api'
-}
+let apiHost = process.env.API_HOST
 
 export const api = {
   get: (url) => {
