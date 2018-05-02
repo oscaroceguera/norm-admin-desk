@@ -71,7 +71,6 @@ const ModulesList = (props) => {
   })
 }
 
-
 class ItemsContainer extends Component {
   showForm = (uuid) =>  (e) => {
     e && e.preventDefault()
