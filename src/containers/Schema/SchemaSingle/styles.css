@@ -1,8 +1,27 @@
 @value colors: "../../../stylesheets/ui-color-palette.css";
-@value grey800, indigo, pink300, cyan, grey, grey300 from colors;
+@value grey800, red, lightBlue, blue, pink, indigo, pink300, cyan, grey, grey300 from colors;
 
 .Container {
   padding: 1em;
+}
+
+.link {
+  max-width: 700px;
+  text-align: right;
+  padding: 1em;
+  margin: 0 auto;
+}
+
+.link > a {
+  background: red;
+  padding: .5em 3em;
+  color: white;
+  text-decoration: none;
+  border-radius: 2px;
+}
+
+.link > a:hover {
+  opacity: .8;
 }
 
 .FormContainer {
