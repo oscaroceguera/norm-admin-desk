@@ -35,3 +35,11 @@ Reto 3:
 `npm install`
 
 `npm start`
+
+## Storybook
+
+`npm run storybook`
+
+
+## API
+https://github.com/oscaroceguera/norm-admin-api
