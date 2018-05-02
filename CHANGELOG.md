@@ -6,8 +6,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.3.0] - [2018-05-02]
+### Added
+- Download Pdf
+- Link to home
+- Clean forms
+
 ## [0.2.1] - [2018-04-23]
-###fixed
+### Fixed
 - noMatch page error
 
 ## [0.2.0] - [2018-04-23]
