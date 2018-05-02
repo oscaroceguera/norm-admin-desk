@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
+
+import {Link} from 'react-router-dom'
 
 import * as schemaActions from '../../../reducers/schema'
 
@@ -51,6 +53,9 @@ class SchemaContainer extends Component {
 
     return (
       <div className={styles.Container}>
+        <div className={styles.link}>
+          <Link to='/'>{`Inicio`}</Link>
+        </div>
         <div className={styles.FormContainer}>
           <SchemaForm
             data={schema}
