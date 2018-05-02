@@ -3,6 +3,7 @@ import { TextField, SelectField, Checkbox, AutoComplete } from './Form'
 import { SchemaForm } from './Schema'
 import Schemas from './Schema/List'
 import Loading from './Progress'
+import Downloading from './Progress/Downloading'
 import ErrorMessage from './Warnings'
 import Modal from './Modal'
 import ShowBtn from './ShowBtn'
@@ -24,5 +25,6 @@ export {
   ShowBtn,
   Icon,
   widthLoading,
-  NoMatch
+  NoMatch,
+  Downloading
 }

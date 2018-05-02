@@ -6,8 +6,6 @@ import * as schemasActions from '../../../reducers/schemas'
 
 import { Schemas } from '../../../components'
 
-import {api} from '../../../api'
-import axios from 'axios'
 class SchemaListContainer extends Component {
   componentWillMount() {
     this.props.fetchSchemaList()

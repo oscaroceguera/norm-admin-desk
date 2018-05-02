@@ -4,12 +4,12 @@ import PropTypes from 'prop-types'
 import withLoading from '../withLoading'
 
 import Icon from '../Icon'
-import Loading from '../Progress'
+import Downloading from '../Progress/Downloading'
 
 import styles from './list.css'
 
 const SchemaListItem = ({ schema: { uuid, name, version, description }, onClick, getPdf }) => (
-  <div>
+  <div className={styles.itemContainer}>
     <div className={styles.item} onClick={onClick(uuid)}>
       <p>{name}</p>
       <div>
@@ -18,8 +18,8 @@ const SchemaListItem = ({ schema: { uuid, name, version, description }, onClick,
         <label>{description}</label>
       </div>
     </div>
-    <div onClick={getPdf(name, uuid)} style={{ border: '1px solid black', cursor: 'pointer' }}>
-      DOWNLOAD PDF
+    <div className={styles.getPdf} onClick={getPdf(name, uuid)}>
+      descargar pdf
     </div>
   </div>
 )
@@ -56,8 +56,6 @@ const NoItemsMsg = () => (
   </p>
 )
 
-// TODO: cmponente loading download
-// TODO: componente de error
 const Schemas = ({ schemas, schemaDetail, addSchema, getPdf, downloading, downloadingFail }) => (
   <div className={styles.container}>
     {schemas.length === 0 && <NoItemsMsg />}
@@ -70,23 +68,7 @@ const Schemas = ({ schemas, schemaDetail, addSchema, getPdf, downloading, downlo
         downloadingFail={downloadingFail}
       />
     </div>
-    {downloading && (
-      <div
-        style={{
-          zIndex: 99999,
-          background: 'rgba(0,0,0, 0.5)',
-          width: '100%',
-          height: '100%',
-          position: 'fixed',
-          top: 0,
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center'
-        }}
-      >
-        <p style={{color: 'white', fontSize: '1.5em'}}>DESCARGANDO PDF</p>
-      </div>
-    )}
+    {downloading && <Downloading />}
     <div className={styles.addSchema} onClick={addSchema}>
       <Icon name='plus' width='50px' />
     </div>
@@ -97,7 +79,9 @@ Schemas.propTypes = {
   schemas: PropTypes.arrayOf(SchemaListItem.propTypes.schema).isRequired,
   schemaDetail: PropTypes.func.isRequired,
   addSchema: PropTypes.func.isRequired,
-  getPdf: PropTypes.func.isRequired
+  getPdf: PropTypes.func.isRequired,
+  downloading: PropTypes.bool,
+  downloadingFail: PropTypes.string
 }
 
 export default withLoading(Schemas)
