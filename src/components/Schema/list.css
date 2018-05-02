@@ -1,5 +1,5 @@
 @value colors: "../../stylesheets/ui-color-palette.css";
-@value grey, indigo, grey300, grey800 from colors;
+@value lightBlue, grey, indigo, grey300, grey800 from colors;
 
 .zeroItemsMsg {
   padding: .5em;
@@ -34,13 +34,14 @@
   }
 }
 
+.itemContainer {
+  margin: 0 0.5em 1em 0;
+}
 
 .item {
   background: white;
   box-shadow: 0px 0px 5px grey;
-  border-radius: 2px;
   cursor: pointer;
-  margin: 0 .5em 1em 0;
   width: 250px;
 }
 
@@ -70,6 +71,20 @@
 .item > div > label {
   color: grey800;
   font-size: .8em;
+}
+
+.getPdf {
+  cursor: pointer;
+  padding: .5em;
+  text-align: center;
+  background: lightBlue;
+  color: white;
+  transition: .3s;
+  text-transform: uppercase;
+}
+
+.getPdf:hover {
+  opacity: 0.7;
 }
 
 .addSchema {
